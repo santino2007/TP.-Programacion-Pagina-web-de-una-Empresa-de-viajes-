@@ -1,13 +1,14 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tours Emprende</title>
+    <title>Tours Emprender</title>
 </head>
+
+
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container-fluid">
@@ -24,8 +25,7 @@
         <a class="nav-link" href="#">compartir</a>
         </li>
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -38,9 +38,57 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
         </li>
     </ul>
-    <button type="button" class="btn btn-primary position-relative">
-    carito
-    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+   <!-- Botón para abrir el carrito -->
+<button onclick="abrirCarrito()" style="padding:10px 20px; cursor:pointer;">
+    🛒 Ver Carrito
+</button>
+
+<!-- Modal del carrito -->
+<div id="carritoModal" style="
+    display:none; 
+    position:fixed; 
+    top:0; left:0; 
+    width:100%; height:100%; 
+    background:rgba(0,0,0,0.6); 
+    z-index:1000;
+">
+<div style="
+    background:#fff; 
+    width:400px; 
+    margin:10% auto; 
+    padding:20px; 
+    border-radius:10px; 
+    position:relative;
+">
+    <h2>🛒 Tu Carrito</h2>
+    <div id="contenidoCarrito">
+        <!-- Aquí se cargarán los productos -->
+        <p>No hay productos en el carrito.</p>
+    </div>
+
+    <!-- Botón cerrar -->
+    <button onclick="cerrarCarrito()" style="
+        position:absolute; 
+        top:10px; 
+        right:10px; 
+        background:red; 
+        color:#fff; 
+        border:none; 
+        padding:5px 10px; 
+        cursor:pointer;
+    ">X</button>
+  </div>
+</div>
+
+<script>
+function abrirCarrito() {
+    document.getElementById('carritoModal').style.display = 'block';
+}
+function cerrarCarrito() {
+    document.getElementById('carritoModal').style.display = 'none';
+}
+</script>
 
     <span class="visually-hidden">unread messages</span>
     </span>
@@ -71,7 +119,12 @@
     // Seleccionar un destino aleatorio
     $destinoAleatorio = $listaDestinos[array_rand($listaDestinos)];
     
-    for($i = 0; $i < 9; $i++) {?>
+    for($i = 0; $i < 9; $i++) {
+        $destinoAleatorio = $listaDestinos[array_rand($listaDestinos)];
+        $precio = rand(500, 2500);
+        $modalId = "modalDestino".$i;
+        ?>
+    
     <div class="col">
     <div class="card" style="width: 18rem;">
         <img src="https://picsum.photos/250/120?random=7" class="card-img-top" alt="españa">
@@ -108,39 +161,36 @@
 </div>
 </div>
 <div class="container mt-3">
-<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-    <div class="carousel-inner">
-    <div class="carousel-item active">
-        <img src="https://picsum.photos/250/120?random=1" class="d-block w-50" alt="...">
+    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://picsum.photos/250/120?random=1" class="d-block w-50" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/250/120?random=2" class="d-block w-50" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://picsum.photos/250/120?random=3" class="d-block w-50" alt="...">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <div class="carousel-item">
-        <img src="https://picsum.photos/250/120?random=2" class="d-block w-50" alt="...">
-    </div>
-    <div class="carousel-item">
-        <img src="https://picsum.photos/250/120?random=3" class="d-block w-50" alt="...">
-    </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
 </div>
+
 
 <div>
-  <div>
     <p>Somos una empresa de viajes dedicada a convertir cada destino en una experiencia inolvidable. Nos especializamos en la organización de viajes personalizados, excursiones, paquetes turísticos y asesoramiento integral para todo tipo de viajeros. Nuestro equipo trabaja con compromiso, pasión y atención al detalle, garantizando seguridad, confianza y acompañamiento en cada etapa del viaje. Ya sea que busques aventura, relax, cultura o naturaleza, estamos para ayudarte a hacer realidad ese viaje que tanto soñás.</p>
-  </div>
 </div>
-
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
-
