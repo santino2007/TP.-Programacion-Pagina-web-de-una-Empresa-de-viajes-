@@ -133,7 +133,7 @@
 
 <div>
   <div>
-    <p>Somos una empresa de viajes dedicada a convertir cada destino en una experiencia inolvidable. Nos especializamos en la organización de viajes personalizados, excursiones, paquetes turísticos y asesoramiento integral para todo tipo de viajeros. Nuestro equipo trabaja con compromiso, pasión y atención al detalle, garantizando seguridad, confianza y acompañamiento en cada etapa del viaje. Ya sea que busques aventura, relax, cultura o naturaleza, estamos para ayudarte a hacer realidad ese viaje que tanto soñás.</p>
+    
   </div>
 </div>
 
