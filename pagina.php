@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours Emprender</title>
 </head>
-
 
 
 <body>
@@ -38,8 +40,8 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
         </li>
     </ul>
-
-   <!-- Botón para abrir el carrito -->
+    
+    <!-- Botón para abrir el carrito -->
 <button onclick="abrirCarrito()" style="padding:10px 20px; cursor:pointer;">
     🛒 Ver Carrito
 </button>
@@ -53,7 +55,7 @@
     background:rgba(0,0,0,0.6); 
     z-index:1000;
 ">
-<div style="
+    <div style="
     background:#fff; 
     width:400px; 
     margin:10% auto; 
@@ -78,7 +80,7 @@
         padding:5px 10px; 
         cursor:pointer;
     ">X</button>
-  </div>
+    </div>
 </div>
 
 <script>
@@ -100,12 +102,65 @@ function cerrarCarrito() {
     </div>
 </div>
 </nav>
+<!--cabiar la monera-->
+<?php
+$moneda = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["moneda"])) {
+        $moneda = $_POST["moneda"];
+    }
+}
+?>
 
-<div class="btn-group-vertical">
-    <button type="button" class="btn btn-dark">peso</button>
-    <button type="button" class="btn btn-dark">dolar</button>
-    <button type="button" class="btn btn-dark">euro</button>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar moneda</title>
+    <!-- Bootstrap (si lo usás) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+
+<form method="POST" action="">
+    <div class="btn-group" role="group" aria-label="Grupo de monedas">
+        <button type="submit" name="moneda" value="dolar" class="btn btn-dark">Dólar</button>
+        <button type="submit" name="moneda" value="peso" class="btn btn-dark">Peso</button>
+        <button type="submit" name="moneda" value="euro" class="btn btn-dark">Euro</button>
+    </div>
+</form>
+
+<div class="mt-3">
+    <?php if ($moneda): ?>
+        <p>Has seleccionado: <strong><?php echo ucfirst($moneda); ?></strong></p>
+    <?php endif; ?>
 </div>
+
+<?php
+
+$moneda = "";
+$precio_base = rand(500, 5000);
+
+$moneda = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["moneda"])) {
+        $moneda = $_POST["moneda"];
+    }
+}
+
+
+
+if ($moneda === "dolar") {
+    $precio_mostrar = number_format($precio_base / 950, 2) . " USD"; // ejemplo cambio
+} elseif ($moneda === "euro") {
+    $precio_mostrar = number_format($precio_base / 1000, 2) . " EUR"; // ejemplo cambio
+} elseif ($moneda === "peso") {
+    $precio_mostrar = $precio_base . " ARS";
+}
+
+?>
+
+
 
 
 <div class="container mt-3">
@@ -131,8 +186,10 @@ function cerrarCarrito() {
         <div class="card-body">
         <h5 class="card-title">Benidorm</h5>
         <?php echo "<p> $destinoAleatorio </p>";?>
-        <p>180.550,99</p>
-
+        <!--motrar precio-->
+        <div class="mt-3">
+            <h3>Precio: <?php echo $precio_mostrar; ?></h3>
+        </div>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             comprar
             </button>
@@ -164,13 +221,13 @@ function cerrarCarrito() {
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://picsum.photos/250/120?random=1" class="d-block w-50" alt="...">
+                <img src="https://picsum.photos/1250/120?random=1" class="d-block w-50" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://picsum.photos/250/120?random=2" class="d-block w-50" alt="...">
+                <img src="https://picsum.photos/1250/120?random=2" class="d-block w-50" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://picsum.photos/250/120?random=3" class="d-block w-50" alt="...">
+                <img src="https://picsum.photos/1250/120?random=3" class="d-block w-50" alt="...">
             </div>
         </div>
 
