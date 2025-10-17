@@ -36,7 +36,8 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
 <main class="flex-shrink-0 py-4">
     <div class="container d-flex justify-content-center">
         <div class="cart text-white">
-
+                <!--poner imagen-->
+                
         </div>
     </div>
 </main>
