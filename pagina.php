@@ -137,6 +137,7 @@ function cerrarCarrito() {
             <!--fecha-->
             <p>fecha de inicio:<?=$paquete['f_inicio']?></p>
             <p>fecha de fin:<?=$paquete['f_fin']?></p>
+            <p></p>
             <span class="badge bg-light text-dark"++>⭐⭐⭐⭐</span>
             <!--motrar precio-->
             <div class="mt-3">
