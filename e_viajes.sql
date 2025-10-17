@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-09-2025 a las 20:08:11
+-- Tiempo de generación: 06-10-2025 a las 21:58:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `carrito` (
   `id_carrito` int(10) NOT NULL,
   `id_usuario` int(10) NOT NULL,
-  `id_precio` int(10) NOT NULL,
+  `id_planes` int(10) NOT NULL,
   `id_metodo` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -99,11 +99,40 @@ INSERT INTO `planes` (`id_planes`, `nom_planes`, `precio`, `f_inicio`, `f_fin`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `planes_servicios`
+--
+
+CREATE TABLE `planes_servicios` (
+  `id_planes` int(10) NOT NULL,
+  `id_servicio` int(10) NOT NULL,
+  `f_creacion` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `planes_servicios`
+--
+
+INSERT INTO `planes_servicios` (`id_planes`, `id_servicio`, `f_creacion`) VALUES
+(1, 2, '2025-09-01 00:00:00'),
+(1, 3, '2025-09-02 00:00:00'),
+(2, 1, '2025-09-03 00:00:00'),
+(2, 4, '2025-09-04 00:00:00'),
+(3, 2, '2025-09-05 00:00:00'),
+(3, 5, '2025-09-06 00:00:00'),
+(4, 1, '2025-09-07 00:00:00'),
+(4, 3, '2025-09-08 00:00:00'),
+(5, 2, '2025-09-09 00:00:00'),
+(5, 4, '2025-09-10 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `servicios`
 --
 
 CREATE TABLE `servicios` (
   `id_servicio` int(10) NOT NULL,
+  `met_transporte` varchar(10) NOT NULL,
   `room_ser` varchar(15) NOT NULL,
   `park_loot` varchar(15) NOT NULL,
   `seguro` varchar(15) NOT NULL
@@ -113,17 +142,17 @@ CREATE TABLE `servicios` (
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id_servicio`, `room_ser`, `park_loot`, `seguro`) VALUES
-(1, 'Disponible', 'Incluido', 'Sí'),
-(2, 'No', 'Incluido', 'No'),
-(3, 'Disponible', 'No', 'Sí'),
-(4, 'Disponible', 'Incluido', 'No'),
-(5, 'No', 'No', 'Sí'),
-(6, 'Disponible', 'Incluido', 'Sí'),
-(7, 'No', 'Incluido', 'No'),
-(8, 'Disponible', 'No', 'Sí'),
-(9, 'No', 'Incluido', 'Sí'),
-(10, 'Disponible', 'Incluido', 'No');
+INSERT INTO `servicios` (`id_servicio`, `met_transporte`, `room_ser`, `park_loot`, `seguro`) VALUES
+(1, '', 'Disponible', 'Incluido', 'Sí'),
+(2, '', 'No', 'Incluido', 'No'),
+(3, '', 'Disponible', 'No', 'Sí'),
+(4, '', 'Disponible', 'Incluido', 'No'),
+(5, '', 'No', 'No', 'Sí'),
+(6, '', 'Disponible', 'Incluido', 'Sí'),
+(7, '', 'No', 'Incluido', 'No'),
+(8, '', 'Disponible', 'No', 'Sí'),
+(9, '', 'No', 'Incluido', 'Sí'),
+(10, '', 'Disponible', 'Incluido', 'No');
 
 -- --------------------------------------------------------
 
@@ -165,7 +194,10 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_us`, `gmail`, `num_tel`, `whatsapp
 -- Indices de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  ADD PRIMARY KEY (`id_carrito`);
+  ADD PRIMARY KEY (`id_carrito`),
+  ADD KEY `id_metodo` (`id_metodo`),
+  ADD KEY `id_planes` (`id_planes`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `metodo_pago`
@@ -178,6 +210,13 @@ ALTER TABLE `metodo_pago`
 --
 ALTER TABLE `planes`
   ADD PRIMARY KEY (`id_planes`);
+
+--
+-- Indices de la tabla `planes_servicios`
+--
+ALTER TABLE `planes_servicios`
+  ADD KEY `fk_planes_servicios` (`id_planes`),
+  ADD KEY `fk_servicios_planes` (`id_servicio`);
 
 --
 -- Indices de la tabla `servicios`
@@ -224,6 +263,25 @@ ALTER TABLE `servicios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_metodo`) REFERENCES `metodo_pago` (`id_metodo`),
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_planes`) REFERENCES `planes` (`id_planes`),
+  ADD CONSTRAINT `carrito_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `planes_servicios`
+--
+ALTER TABLE `planes_servicios`
+  ADD CONSTRAINT `fk_planes_servicios` FOREIGN KEY (`id_planes`) REFERENCES `planes` (`id_planes`),
+  ADD CONSTRAINT `fk_servicios_planes` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicio`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
