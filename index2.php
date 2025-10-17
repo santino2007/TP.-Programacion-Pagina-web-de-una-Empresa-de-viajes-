@@ -1,7 +1,7 @@
 <?php
 require_once 'componentes/conexiones.php';
 
-$paquetes= $conexion->query("SELECT * FROM e_viajes WHERE paquete.estado = 'disponible';");
+$paquetes= $conexion->query("SELECT * FROM e_viajes WHERE paquete.estado = 'activo';");
 
 ?>
 

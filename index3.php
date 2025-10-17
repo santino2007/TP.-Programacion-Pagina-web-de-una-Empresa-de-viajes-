@@ -1,7 +1,7 @@
 <?php
-require_once 'componentes/conexiones.php';
+require_once 'conexiones.php';
 
-$paquetes = $conexion->query("SELECT * FROM e_viajes WHERE paquete.estado = 'disponible';");
+$paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo';");
 
 ?>
 <!DOCTYPE html>
@@ -15,24 +15,32 @@ $paquetes = $conexion->query("SELECT * FROM e_viajes WHERE paquete.estado = 'dis
 </head>
 
 <body>
-    <div class="row row-cols-2 row-cols-md-3 g-3">
-        <?php foreach ($paquetes as $paquete) { ?>
-            <div class="col-md-6 col-ig-4 mb-4">
-                <div class="cart">
-                    <div class="d-flex flex-column">
-                        <div class="cart-title">
-                            <h3><?= $paquete['nombre'] ?></h3>
-                        </div>
-                        <div class="cart-body">
-                            <img src="card-img-top" alt="<?=$paquete['imagen']?>" als="">
-                            <h2><?= $paquete['decricion'] ?></h2>
-                        </div>
-                        <div class="cart-footer"></div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
+    <?php
+        $id_planes =isset($_GET['id']) ? intval($_GET['id']):0;
+
+            if ($id_planes !=null && $id_planes > 0) {
+                require_once 'conexiones.php';
+
+            }
+            $paquete = $conexion->query("
+            SELECT * WHERE paquetes.id_planes = $id_planes AND (paquetes.estado= 'disponible' OR paquetes.estado = 'proximo')"
+            )->fetch_assoc();
+            if (!$paquete){
+                echo"div class='alerta alerta-danger'>paquete no encontrado o no disponible.<div>";
+                exit;
+            }else{
+                $servidor = $conexion->query("
+                SELECT * FROM selvicios JOIN planes_srvicio ON servicio asociados y calcula todo  ");
+        }
+    ?>
+<main class="flex-shrink-0 py-4">
+    <div class="container d-flex justify-content-center">
+        <div class="cart text-white">
+                <!--poner imagen-->
+                
+        </div>
     </div>
+</main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

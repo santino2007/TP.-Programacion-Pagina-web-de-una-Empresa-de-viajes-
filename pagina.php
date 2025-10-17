@@ -1,5 +1,10 @@
+<?php
+require_once 'conexiones.php';
+
+$paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo';");
 
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +17,16 @@
 
 
 <body>
+
+<body style="background-color: lightblue;">
+
+</body>
+
+
+
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container-fluid">
     <a class="navbar-brand" href="#">Tour Emprende</a>
@@ -102,63 +117,6 @@ function cerrarCarrito() {
     </div>
 </div>
 </nav>
-<!--cabiar la monera-->
-<?php
-$moneda = "";
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["moneda"])) {
-        $moneda = $_POST["moneda"];
-    }
-}
-?>
-
-
-
-<head>
-    <meta charset="UTF-8">
-    <title>Seleccionar moneda</title>
-    <!-- Bootstrap (si lo usás) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="p-4">
-
-<form method="POST" action="">
-    <div class="btn-group" role="group" aria-label="Grupo de monedas">
-        <button type="submit" name="moneda" value="dolar" class="btn btn-dark">Dólar</button>
-        <button type="submit" name="moneda" value="peso" class="btn btn-dark">Peso</button>
-        <button type="submit" name="moneda" value="euro" class="btn btn-dark">Euro</button>
-    </div>
-</form>
-
-<div class="mt-3">
-    <?php if ($moneda): ?>
-        <p>Has seleccionado: <strong><?php echo ucfirst($moneda); ?></strong></p>
-    <?php endif; ?>
-</div>
-
-<?php
-
-$moneda = "";
-$precio_base = rand(500, 5000);
-
-$moneda = "";
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["moneda"])) {
-        $moneda = $_POST["moneda"];
-    }
-}
-
-
-
-if ($moneda === "dolar") {
-    $precio_mostrar = number_format($precio_base / 950, 2) . " USD"; // ejemplo cambio
-} elseif ($moneda === "euro") {
-    $precio_mostrar = number_format($precio_base / 1000, 2) . " EUR"; // ejemplo cambio
-} elseif ($moneda === "peso") {
-    $precio_mostrar = $precio_base . " ARS";
-}
-
-?>
 
 
 
@@ -167,85 +125,38 @@ if ($moneda === "dolar") {
 
     <div class="row row-cols-2 row-cols-md-3 g-4">
     <?php
-    $destinos = "Barcelona - Disfruta de las playas, la Sagrada Familia y la mejor comida mediterránea.|París - Vive el romance en la ciudad de la luz y visita la Torre Eiffel.|Roma - Recorre el Coliseo y disfruta de la auténtica pasta italiana.|Cancún - Relájate en sus playas paradisíacas y explora las ruinas mayas.|Bariloche - Descubre la belleza de la Patagonia y sus lagos cristalinos.|Tokio - Vive la mezcla perfecta entre tradición y tecnología futurista.|El Cairo - Explora las pirámides y la historia milenaria del Nilo.|Río de Janeiro - Baila samba en el carnaval y disfruta de la playa de Copacabana.|Atenas - Recorre la Acrópolis y siente la cuna de la civilización.|Nueva York - Conquista la Gran Manzana y vive la ciudad que nunca duerme.";
-    // Convertir en array
-    $listaDestinos = explode("|", $destinos);
-    
-    // Seleccionar un destino aleatorio
-    $destinoAleatorio = $listaDestinos[array_rand($listaDestinos)];
-    
-    for($i = 0; $i < 9; $i++) {
-        $destinoAleatorio = $listaDestinos[array_rand($listaDestinos)];
-        $precio = rand(500, 2500);
-        $modalId = "modalDestino".$i;
+    if ($paquetes->num_rows >0)
+        foreach($paquetes as $paquete) {
         ?>
     
     <div class="col">
     <div class="card" style="width: 18rem;">
         <img src="https://picsum.photos/250/120?random=7" class="card-img-top" alt="españa">
         <div class="card-body">
-        <h5 class="card-title">Benidorm</h5>
-        <?php echo "<p> $destinoAleatorio </p>";?>
-        <!--motrar precio-->
-        <div class="mt-3">
-            <h3>Precio: <?php echo $precio_mostrar; ?></h3>
-        </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            comprar
-            </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <?php echo "<p> $destinoAleatorio </p>";?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancelar</button>
-                    <button type="button" class="btn btn-primary">comprar</button>
-                </div>
-                </div>
+            <h5 class="card-title"><?=$paquete['nom_planes']?> </h5>
+            <!--fecha-->
+            <p>fecha de inicio:<?=$paquete['f_inicio']?></p>
+            <p>fecha de fin:<?=$paquete['f_fin']?></p>
+            <p></p>
+            <span class="badge bg-light text-dark"++>⭐⭐⭐⭐</span>
+            <!--motrar precio-->
+            <div class="mt-3">
+                <h3>Precio:<?=$paquete['precio']?></h3>
             </div>
-            </div>
-        <span class="badge bg-light text-dark"++>⭐⭐⭐⭐</span>
+                <div class="card-footer bg-transpa border-0 mt-3">
+                    <a href="index3.php?id<?=$paquete['id_planes']?>"
+                    class="btn btn-success w-100 fw-bold rounded-pill">
+                    comprar
+                    </a>
+                </div>
         </div>
     </div>
     </div>
     <?php } ?>
 </div>
 </div>
-<div class="container mt-3">
-    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://picsum.photos/1250/120?random=1" class="d-block w-50" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://picsum.photos/1250/120?random=2" class="d-block w-50" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://picsum.photos/1250/120?random=3" class="d-block w-50" alt="...">
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
 
 
-<div>
-    <p>Somos una empresa de viajes dedicada a convertir cada destino en una experiencia inolvidable. Nos especializamos en la organización de viajes personalizados, excursiones, paquetes turísticos y asesoramiento integral para todo tipo de viajeros. Nuestro equipo trabaja con compromiso, pasión y atención al detalle, garantizando seguridad, confianza y acompañamiento en cada etapa del viaje. Ya sea que busques aventura, relax, cultura o naturaleza, estamos para ayudarte a hacer realidad ese viaje que tanto soñás.</p>
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
