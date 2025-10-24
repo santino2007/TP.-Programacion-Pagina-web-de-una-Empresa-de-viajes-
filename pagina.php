@@ -110,35 +110,6 @@ function cerrarCarrito() {
 }
 </script>
 
-<!-- NUEVO -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-// --- Efecto de ocultar la barra scroll ---
-let lastScroll = 0;
-const navbar = document.getElementById("navbar");
-
-window.addEventListener("scroll", () => {
-const currentScroll = window.pageYOffset;
-if (currentScroll > lastScroll && currentScroll > 80) {
-// Bajando
-navbar.style.top = "-80px";
-} else {
-// Subiendo
-navbar.style.top = "0";
-}
-lastScroll = currentScroll;
-});
-
-    <span class="visually-hidden">unread messages</span>
-    </span>
-    </button>
-    <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="buscar" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">buscar</button>
-    </form>
-    </div>
-</div>
-</nav>
 
 
 
