@@ -13,11 +13,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours Emprender</title>
-    <style>
-        .navbar{
-            transition: top 0.4s;
-        }
-    </style>
+
 </head>
 
 
