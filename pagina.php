@@ -125,7 +125,7 @@ function cerrarCarrito() {
 
     <div class="row row-cols-2 row-cols-md-3 g-4">
     <?php
-    if ($paquetes->num_rows >0)
+    if ($paquetes->num_rows > 0)
         foreach($paquetes as $paquete) {
         ?>
     
