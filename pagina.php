@@ -13,11 +13,17 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours Emprender</title>
+    <style>
+        .navbar{
+            transition: top 0.4s;
+        }
+    </style>
 </head>
 
 
 <body>
 
+<body style="padding-top: 80px">
 <body style="background-color: lightblue;">
 
 </body>
@@ -27,7 +33,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 <div class="container-fluid">
     <a class="navbar-brand" href="#">Tour Emprende</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,15 +45,15 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
         <a class="nav-link active" aria-current="page" href="#">inicio</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">compartir</a>
+        <a class="nav-link" href="#">Compartir</a>
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Acción</a></li>
+            <li><a class="dropdown-item" href="#">Otra acción</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Algo más aquí</a></li>
         </ul>
 
         </li>
@@ -57,7 +63,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     </ul>
     
     <!-- Botón para abrir el carrito -->
-<button onclick="abrirCarrito()" style="padding:10px 20px; cursor:pointer;">
+<button onclick="abrirCarrito()" class="btn btn-outline-success" style="padding:10px 20px; cursor:pointer;">
     🛒 Ver Carrito
 </button>
 
@@ -68,7 +74,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     top:0; left:0; 
     width:100%; height:100%; 
     background:rgba(0,0,0,0.6); 
-    z-index:1000;
+    z-index:1050;
 ">
     <div style="
     background:#fff; 
@@ -86,14 +92,15 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
 
     <!-- Botón cerrar -->
     <button onclick="cerrarCarrito()" style="
-        position:absolute; 
-        top:10px; 
-        right:10px; 
-        background:red; 
-        color:#fff; 
-        border:none; 
-        padding:5px 10px; 
+        position:absolute;
+        top:10px;
+        right:10px;
+        background:red;
+        color:#fff;
+        border:none;
+        padding:5px 10px;
         cursor:pointer;
+        border-radius:5px;
     ">X</button>
     </div>
 </div>
@@ -106,6 +113,25 @@ function cerrarCarrito() {
     document.getElementById('carritoModal').style.display = 'none';
 }
 </script>
+
+<!-- NUEVO -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// --- Efecto de ocultar la barra scroll ---
+let lastScroll = 0;
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+const currentScroll = window.pageYOffset;
+if (currentScroll > lastScroll && currentScroll > 80) {
+// Bajando
+navbar.style.top = "-80px";
+} else {
+// Subiendo
+navbar.style.top = "0";
+}
+lastScroll = currentScroll;
+});
 
     <span class="visually-hidden">unread messages</span>
     </span>
