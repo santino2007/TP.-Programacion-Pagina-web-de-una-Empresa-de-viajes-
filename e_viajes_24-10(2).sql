@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-10-2025 a las 19:03:50
+-- Tiempo de generación: 24-10-2025 a las 20:09:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -72,29 +72,33 @@ INSERT INTO `metodo_pago` (`id_metodo`, `transferencia`, `tar_credito`, `efectiv
 
 CREATE TABLE `planes` (
   `id_planes` int(15) NOT NULL,
-  `nom_planes` varchar(140) NOT NULL,
-  `precio` decimal(10,4) NOT NULL,
+  `nom_planes` varchar(35) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
   `f_inicio` date NOT NULL,
   `f_fin` date NOT NULL,
-  `estado` varchar(15) NOT NULL,
-  `id_servicio` int(10) NOT NULL
+  `estado` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `planes`
 --
 
-INSERT INTO `planes` (`id_planes`, `nom_planes`, `precio`, `f_inicio`, `f_fin`, `estado`, `id_servicio`) VALUES
-(1, 'Plan Básico', 15.0000, '2025-01-10', '2025-04-10', 'Activo', 1),
-(2, 'Plan Estándar', 30.0000, '2025-02-05', '2025-08-05', 'Activo', 2),
-(3, 'Plan Premium', 50.0000, '2025-03-15', '2025-09-15', 'Inactivo', 3),
-(4, 'Plan Familiar', 45.0000, '2025-04-01', '2025-12-01', 'Activo', 1),
-(5, 'Plan Empresarial', 80.0000, '2025-01-20', '2025-06-20', 'Pendiente', 4),
-(6, 'Plan Estudiantil', 12.0000, '2025-05-10', '2025-08-10', 'Activo', 2),
-(7, 'Plan Plus', 60.0000, '2025-06-01', '2025-12-01', 'Inactivo', 5),
-(8, 'Plan Pro', 70.0000, '2025-07-01', '2025-10-01', 'Activo', 3),
-(9, 'Plan Avanzado', 90.0000, '2025-08-05', '2025-12-31', 'Pendiente', 4),
-(10, 'Plan Flexible', 25.0000, '2025-09-01', '2025-11-30', 'Activo', 2);
+INSERT INTO `planes` (`id_planes`, `nom_planes`, `precio`, `f_inicio`, `f_fin`, `estado`) VALUES
+(1, 'Plan Básico', 6500.00, '2025-01-10', '2025-06-10', 'Activo'),
+(2, 'Plan Familiar', 11800.00, '2025-02-01', '2025-08-01', 'Activo'),
+(3, 'Plan Premium', 18500.00, '2025-03-05', '2025-12-05', 'Inactivo'),
+(4, 'Plan Empresarial', 29900.00, '2025-04-15', '2025-10-15', 'Activo'),
+(5, 'Plan Estudiantil', 5200.00, '2025-05-01', '2025-11-01', 'Suspendido'),
+(6, 'Plan Plus', 9300.00, '2025-03-10', '2025-09-10', 'Activo'),
+(7, 'Plan Familiar Plus', 14500.00, '2025-06-01', '2025-12-01', 'Activo'),
+(8, 'Plan Corporativo', 25200.00, '2025-07-15', '2026-01-15', 'Activo'),
+(9, 'Plan Económico', 4800.00, '2025-02-05', '2025-07-05', 'Activo'),
+(10, 'Plan Ejecutivo', 18800.00, '2025-05-20', '2025-11-20', 'Activo'),
+(11, 'Plan Premium Plus', 21500.00, '2025-03-25', '2025-09-25', 'Inactivo'),
+(12, 'Plan PyME', 16700.00, '2025-04-05', '2025-10-05', 'Activo'),
+(13, 'Plan Avanzado', 13200.00, '2025-01-20', '2025-07-20', 'Activo'),
+(14, 'Plan Ultra', 27400.00, '2025-06-10', '2025-12-10', 'Suspendido'),
+(15, 'Plan Anual Completo', 31500.00, '2025-01-01', '2025-12-31', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -132,27 +136,26 @@ INSERT INTO `planes_servicios` (`id_planes`, `id_servicio`, `f_creacion`) VALUES
 
 CREATE TABLE `servicios` (
   `id_servicio` int(10) NOT NULL,
-  `met_transporte` varchar(10) NOT NULL,
-  `room_ser` varchar(15) NOT NULL,
-  `park_loot` varchar(15) NOT NULL,
-  `seguro` varchar(15) NOT NULL
+  `met_transporte` varchar(15) NOT NULL,
+  `room_service` varchar(35) NOT NULL,
+  `parcking_lot` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id_servicio`, `met_transporte`, `room_ser`, `park_loot`, `seguro`) VALUES
-(1, '', 'Disponible', 'Incluido', 'Sí'),
-(2, '', 'No', 'Incluido', 'No'),
-(3, '', 'Disponible', 'No', 'Sí'),
-(4, '', 'Disponible', 'Incluido', 'No'),
-(5, '', 'No', 'No', 'Sí'),
-(6, '', 'Disponible', 'Incluido', 'Sí'),
-(7, '', 'No', 'Incluido', 'No'),
-(8, '', 'Disponible', 'No', 'Sí'),
-(9, '', 'No', 'Incluido', 'Sí'),
-(10, '', 'Disponible', 'Incluido', 'No');
+INSERT INTO `servicios` (`id_servicio`, `met_transporte`, `room_service`, `parcking_lot`) VALUES
+(21, 'Avión', 'Disponible las 24h', 'Sí'),
+(22, 'Autobús', 'Solo de 8:00 a 22:00', 'No'),
+(23, 'Avión', 'Disponible las 24h', 'Sí'),
+(24, 'Autobús', 'No disponible', 'Sí'),
+(25, 'Avión', 'Solo desayuno en habitación', 'Sí'),
+(26, 'Autobús', 'Disponible bajo pedido', 'No'),
+(27, 'Avión', 'Disponible las 24h', 'Sí'),
+(28, 'Autobús', 'No disponible', 'No'),
+(29, 'Avión', 'Servicio premium con menú completo', 'Sí'),
+(30, 'Autobús', 'Disponible de 10:00 a 20:00', 'Sí');
 
 -- --------------------------------------------------------
 
@@ -247,16 +250,10 @@ ALTER TABLE `metodo_pago`
   MODIFY `id_metodo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `planes`
---
-ALTER TABLE `planes`
-  MODIFY `id_planes` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id_servicio` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_servicio` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
