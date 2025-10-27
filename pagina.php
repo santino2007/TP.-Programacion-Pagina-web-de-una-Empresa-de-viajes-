@@ -53,8 +53,8 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     </ul>
 
 <!-- Botón para Iniciar seccion -->
-<button type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2" style="background: linear-gradient( #007bff, #00b4d8); transition: all 0.3s ease;">
-    🔑 Iniciar seccion
+<button type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2" style="background: linear-gradient(90deg, #007bff, #00b4d8); border: none; color: white; transition: all 0.3s ease;">
+    Iniciar sección
 </button>
 
 
