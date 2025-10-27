@@ -17,10 +17,11 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
 </head>
 
 
+
 <body>
 
-<body style="padding-top: 80px">
-<body style="background-color: lightblue;">
+    </body style="padding-top: 80px">
+    <body style="background-color: lightblue;">
 
 </body>
 
@@ -46,10 +47,10 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Acción</a></li>
-            <li><a class="dropdown-item" href="#">Otra acción</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Algo más aquí</a></li>
+            <li><a class="dropdown-item" href="#">comfiguracion</a></li>
+            <li><a class="dropdown-item" href="#"></a></li>
+            <li><hr class="dropdown-divider"href="#"></li>
+            <li><a class="dropdown-item" href="#">acitente</a></li>
         </ul>
 
         </li>
@@ -57,7 +58,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
         </li>
     </ul>
-    
+    <button>inicio secion</button>
     <!-- Botón para abrir el carrito -->
 <button onclick="abrirCarrito()" class="btn btn-outline-success" style="padding:10px 20px; cursor:pointer;">
     🛒 Ver Carrito
