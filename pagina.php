@@ -1,9 +1,6 @@
 <?php
 require_once 'conexiones.php';
-
 $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo';");
-
-
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +10,6 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours Emprender</title>
-
 </head>
 
 
@@ -24,9 +20,6 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     <body style="background-color: lightblue;">
 
 </body>
-
-
-
 
 
 
@@ -58,8 +51,14 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
         </li>
     </ul>
-    <button>inicio secion</button>
-    <!-- Botón para abrir el carrito -->
+
+<!-- Botón para Iniciar seccion -->
+<button type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2" style="background: linear-gradient( #007bff, #00b4d8); transition: all 0.3s ease;">
+    🔑 Iniciar seccion
+</button>
+
+
+<!-- Botón para abrir el carrito -->
 <button onclick="abrirCarrito()" class="btn btn-outline-success" style="padding:10px 20px; cursor:pointer;">
     🛒 Ver Carrito
 </button>
