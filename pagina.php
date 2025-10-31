@@ -53,7 +53,8 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     </ul>
 
 <!-- Botón para Iniciar seccion -->
-<button onclick="abrirCarrito()" class="btn btn-outline-success" style="padding:10px 20px; cursor:pointer;">
+<button onclick="" class="btn btn-outline-success" style="padding:10px 20px; cursor:pointer;">
+    
 <button type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2" style="padding:10px 20px; background: linear-gradient(90deg,rgb(84, 135, 244),rgb(84, 135, 244)); border: none; color: white; transition: all 0.3s ease;">
     Iniciar sección
 </button>
