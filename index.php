@@ -17,7 +17,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
 <body>
 
     <body style="padding-top: 80px">
-    <body style=" background-color:rgb(181, 74, 16);">
+    <body style="background-color: lightblue;">
 
 
 
