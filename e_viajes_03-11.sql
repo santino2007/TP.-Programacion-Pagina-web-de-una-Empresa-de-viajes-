@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-10-2025 a las 20:09:34
+-- Tiempo de generación: 03-11-2025 a las 20:53:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,28 +41,11 @@ CREATE TABLE `carrito` (
 --
 
 CREATE TABLE `metodo_pago` (
-  `id_metodo` int(10) NOT NULL,
-  `transferencia` varchar(100) NOT NULL,
-  `tar_credito` varchar(100) NOT NULL,
-  `efectivo` varchar(100) NOT NULL,
-  `id_usuario` int(10) NOT NULL
+  `id_metodo` int(15) NOT NULL,
+  `tipo_pago` varchar(20) NOT NULL,
+  `detalles_pago` varchar(35) NOT NULL,
+  `id_usuario` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `metodo_pago`
---
-
-INSERT INTO `metodo_pago` (`id_metodo`, `transferencia`, `tar_credito`, `efectivo`, `id_usuario`) VALUES
-(1, 'Sí', 'No', 'No', 1),
-(2, 'No', 'Sí', 'No', 2),
-(3, 'No', 'No', 'Sí', 3),
-(4, 'Sí', 'Sí', 'No', 4),
-(5, 'No', 'Sí', 'Sí', 5),
-(6, 'Sí', 'No', 'Sí', 6),
-(7, 'No', 'Sí', 'No', 7),
-(8, 'Sí', 'Sí', 'Sí', 8),
-(9, 'No', 'No', 'Sí', 9),
-(10, 'Sí', 'No', 'No', 10);
 
 -- --------------------------------------------------------
 
@@ -73,32 +56,33 @@ INSERT INTO `metodo_pago` (`id_metodo`, `transferencia`, `tar_credito`, `efectiv
 CREATE TABLE `planes` (
   `id_planes` int(15) NOT NULL,
   `nom_planes` varchar(35) NOT NULL,
-  `precio` decimal(10,2) NOT NULL,
+  `imagenes` longtext NOT NULL,
+  `estado` varchar(15) NOT NULL,
   `f_inicio` date NOT NULL,
   `f_fin` date NOT NULL,
-  `estado` varchar(15) NOT NULL
+  `precio` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `planes`
 --
 
-INSERT INTO `planes` (`id_planes`, `nom_planes`, `precio`, `f_inicio`, `f_fin`, `estado`) VALUES
-(1, 'Plan Básico', 6500.00, '2025-01-10', '2025-06-10', 'Activo'),
-(2, 'Plan Familiar', 11800.00, '2025-02-01', '2025-08-01', 'Activo'),
-(3, 'Plan Premium', 18500.00, '2025-03-05', '2025-12-05', 'Inactivo'),
-(4, 'Plan Empresarial', 29900.00, '2025-04-15', '2025-10-15', 'Activo'),
-(5, 'Plan Estudiantil', 5200.00, '2025-05-01', '2025-11-01', 'Suspendido'),
-(6, 'Plan Plus', 9300.00, '2025-03-10', '2025-09-10', 'Activo'),
-(7, 'Plan Familiar Plus', 14500.00, '2025-06-01', '2025-12-01', 'Activo'),
-(8, 'Plan Corporativo', 25200.00, '2025-07-15', '2026-01-15', 'Activo'),
-(9, 'Plan Económico', 4800.00, '2025-02-05', '2025-07-05', 'Activo'),
-(10, 'Plan Ejecutivo', 18800.00, '2025-05-20', '2025-11-20', 'Activo'),
-(11, 'Plan Premium Plus', 21500.00, '2025-03-25', '2025-09-25', 'Inactivo'),
-(12, 'Plan PyME', 16700.00, '2025-04-05', '2025-10-05', 'Activo'),
-(13, 'Plan Avanzado', 13200.00, '2025-01-20', '2025-07-20', 'Activo'),
-(14, 'Plan Ultra', 27400.00, '2025-06-10', '2025-12-10', 'Suspendido'),
-(15, 'Plan Anual Completo', 31500.00, '2025-01-01', '2025-12-31', 'Activo');
+INSERT INTO `planes` (`id_planes`, `nom_planes`, `imagenes`, `estado`, `f_inicio`, `f_fin`, `precio`) VALUES
+(1, 'Plan Básico', '', 'Activo', '2025-01-10', '2025-06-10', 6500.00),
+(2, 'Plan Familiar', '', 'Activo', '2025-02-01', '2025-08-01', 11800.00),
+(3, 'Plan Premium', '', 'Inactivo', '2025-03-05', '2025-12-05', 18500.00),
+(4, 'Plan Empresarial', '', 'Activo', '2025-04-15', '2025-10-15', 29900.00),
+(5, 'Plan Estudiantil', '', 'Suspendido', '2025-05-01', '2025-11-01', 5200.00),
+(6, 'Plan Plus', '', 'Activo', '2025-03-10', '2025-09-10', 9300.00),
+(7, 'Plan Familiar Plus', '', 'Activo', '2025-06-01', '2025-12-01', 14500.00),
+(8, 'Plan Corporativo', '', 'Activo', '2025-07-15', '2026-01-15', 25200.00),
+(9, 'Plan Económico', '', 'Activo', '2025-02-05', '2025-07-05', 4800.00),
+(10, 'Plan Ejecutivo', '', 'Activo', '2025-05-20', '2025-11-20', 18800.00),
+(11, 'Plan Premium Plus', '', 'Inactivo', '2025-03-25', '2025-09-25', 21500.00),
+(12, 'Plan PyME', '', 'Activo', '2025-04-05', '2025-10-05', 16700.00),
+(13, 'Plan Avanzado', '', 'Activo', '2025-01-20', '2025-07-20', 13200.00),
+(14, 'Plan Ultra', '', 'Suspendido', '2025-06-10', '2025-12-10', 27400.00),
+(15, 'Plan Anual Completo', '', 'Activo', '2025-01-01', '2025-12-31', 31500.00);
 
 -- --------------------------------------------------------
 
@@ -135,27 +119,27 @@ INSERT INTO `planes_servicios` (`id_planes`, `id_servicio`, `f_creacion`) VALUES
 --
 
 CREATE TABLE `servicios` (
-  `id_servicio` int(10) NOT NULL,
-  `met_transporte` varchar(15) NOT NULL,
-  `room_service` varchar(35) NOT NULL,
-  `parcking_lot` varchar(15) NOT NULL
+  `id_servicio` int(15) NOT NULL,
+  `tipo_servicio` varchar(25) NOT NULL,
+  `descripcion` varchar(70) NOT NULL,
+  `precio` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id_servicio`, `met_transporte`, `room_service`, `parcking_lot`) VALUES
-(21, 'Avión', 'Disponible las 24h', 'Sí'),
-(22, 'Autobús', 'Solo de 8:00 a 22:00', 'No'),
-(23, 'Avión', 'Disponible las 24h', 'Sí'),
-(24, 'Autobús', 'No disponible', 'Sí'),
-(25, 'Avión', 'Solo desayuno en habitación', 'Sí'),
-(26, 'Autobús', 'Disponible bajo pedido', 'No'),
-(27, 'Avión', 'Disponible las 24h', 'Sí'),
-(28, 'Autobús', 'No disponible', 'No'),
-(29, 'Avión', 'Servicio premium con menú completo', 'Sí'),
-(30, 'Autobús', 'Disponible de 10:00 a 20:00', 'Sí');
+INSERT INTO `servicios` (`id_servicio`, `tipo_servicio`, `descripcion`, `precio`) VALUES
+(1, 'room_service', 'Desayuno continental incluido en la tarifa de la habitación.', 8500.00),
+(2, 'tipo_transporte', 'Traslado privado del aeropuerto al hotel en furgoneta de lujo.', 35000.00),
+(3, 'seguro', 'Póliza de seguro de viaje de cobertura médica internacional básica.', 22000.00),
+(4, 'parcking_lot', 'Estacionamiento cubierto y vigilado incluido por 3 noches.', 3300.00),
+(5, 'tipo_transporte', 'Alquiler de coche económico por un día (kilometraje ilimitado).', 28000.00),
+(6, 'room_service', 'Servicio de cena a la habitación para dos personas (menú fijo).', 17500.00),
+(7, 'seguro', 'Suplemento de seguro de cancelación de viaje por cualquier causa.', 45000.00),
+(8, 'parcking_lot', 'Estacionamiento de larga estancia en aeropuerto (7 días).', 55000.00),
+(9, 'tipo_transporte', 'Billete de tren de larga distancia entre provincias (clase turista).', 65000.00),
+(10, 'Excursión', 'Tour de avistamiento de fauna local (medio día).', 40000.00);
 
 -- --------------------------------------------------------
 
@@ -169,25 +153,24 @@ CREATE TABLE `usuarios` (
   `gmail` varchar(100) NOT NULL,
   `num_tel` varchar(100) NOT NULL,
   `whatsapp` varchar(100) NOT NULL,
-  `contraseña` varchar(100) NOT NULL,
-  `promo` varchar(150) NOT NULL
+  `contraseña` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre_us`, `gmail`, `num_tel`, `whatsapp`, `contraseña`, `promo`) VALUES
-(1, 'JuanPerez', 'juanperez@gmail.com', '3516549872', '3516549872', 'Jp12345*', 'Sí'),
-(2, 'MariaLopez', 'maria.lopez@yahoo.com', '3517654321', '3517654321', 'Ml*2024', 'No'),
-(3, 'CarlosG', 'carlosg@hotmail.com', '3519988776', '3519988776', 'Cg!pass01', 'Sí'),
-(4, 'SofiaM', 'sofia.m@gmail.com', '3514433221', '3514433221', 'Sm2024#', 'No'),
-(5, 'LeoRod', 'leonardo.rod@gmail.com', '3512233445', '3512233445', 'LrPass*22', 'Sí'),
-(6, 'ValentinaR', 'vale.r@gmail.com', '3513344556', '3513344556', 'Vr@1234', 'No'),
-(7, 'MartinS', 'martin.s@hotmail.com', '3515566778', '3515566778', 'Ms*pass24', 'Sí'),
-(8, 'CamilaTor', 'camila.tor@gmail.com', '3516677889', '3516677889', 'Ct!4567', 'No'),
-(9, 'AndresF', 'andres.f@yahoo.com', '3517788990', '3517788990', 'Af#9876', 'Sí'),
-(10, 'JulietaC', 'julieta.c@gmail.com', '3518899001', '3518899001', 'Jc*2025', 'No');
+INSERT INTO `usuarios` (`id_usuario`, `nombre_us`, `gmail`, `num_tel`, `whatsapp`, `contraseña`) VALUES
+(1, 'JuanPerez', 'juanperez@gmail.com', '3516549872', '3516549872', 'Jp12345*'),
+(2, 'MariaLopez', 'maria.lopez@yahoo.com', '3517654321', '3517654321', 'Ml*2024'),
+(3, 'CarlosG', 'carlosg@hotmail.com', '3519988776', '3519988776', 'Cg!pass01'),
+(4, 'SofiaM', 'sofia.m@gmail.com', '3514433221', '3514433221', 'Sm2024#'),
+(5, 'LeoRod', 'leonardo.rod@gmail.com', '3512233445', '3512233445', 'LrPass*22'),
+(6, 'ValentinaR', 'vale.r@gmail.com', '3513344556', '3513344556', 'Vr@1234'),
+(7, 'MartinS', 'martin.s@hotmail.com', '3515566778', '3515566778', 'Ms*pass24'),
+(8, 'CamilaTor', 'camila.tor@gmail.com', '3516677889', '3516677889', 'Ct!4567'),
+(9, 'AndresF', 'andres.f@yahoo.com', '3517788990', '3517788990', 'Af#9876'),
+(10, 'JulietaC', 'julieta.c@gmail.com', '3518899001', '3518899001', 'Jc*2025');
 
 --
 -- Índices para tablas volcadas
@@ -206,7 +189,8 @@ ALTER TABLE `carrito`
 -- Indices de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
-  ADD PRIMARY KEY (`id_metodo`);
+  ADD PRIMARY KEY (`id_metodo`),
+  ADD KEY `fk_id_usiario` (`id_usuario`);
 
 --
 -- Indices de la tabla `planes`
@@ -244,18 +228,6 @@ ALTER TABLE `carrito`
   MODIFY `id_carrito` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `metodo_pago`
---
-ALTER TABLE `metodo_pago`
-  MODIFY `id_metodo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `servicios`
---
-ALTER TABLE `servicios`
-  MODIFY `id_servicio` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -272,6 +244,12 @@ ALTER TABLE `carrito`
   ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_metodo`) REFERENCES `metodo_pago` (`id_metodo`),
   ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_planes`) REFERENCES `planes` (`id_planes`),
   ADD CONSTRAINT `carrito_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `metodo_pago`
+--
+ALTER TABLE `metodo_pago`
+  ADD CONSTRAINT `fk_id_usiario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
 -- Filtros para la tabla `planes_servicios`
