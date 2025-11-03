@@ -53,10 +53,14 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
     </ul>
 
 <!-- Botón para Iniciar seccion -->
-<button type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2" style="padding:10px 20px; background: linear-gradient(90deg,rgb(84, 135, 244),rgb(84, 135, 244)); border: none; color: white; transition: all 0.3s ease;">
-    Iniciar sección
-</button>
+<div>
+    <button onclick="iniciarSesion()" type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2" style="padding:10px 20px; background: linear-gradient(90deg,rgb(84, 135, 244),rgb(84, 135, 244)); border: none; color: white; transition: all 0.3s ease;">   
+        Iniciar sección
+    </button>
+</div>
+<div id="iniciarSesion">
 
+</div>
 
 <!-- Botón para abrir el carrito -->
 <button onclick="abrirCarrito()" class="btn btn-outline-success" style="padding:10px 20px; cursor:pointer;">
@@ -136,6 +140,12 @@ function cerrarCarrito() {
             <div class="mt-3">
                 <h3>Precio:<?=$paquete['precio']?></h3>
             </div>
+            <div class="card-footer bg-transpa border-0 mt-3">
+                        <a href="index2.php?id<?=$paquete['id_planes']?>"
+                        class="btn btn-success w-100 fw-bold rounded-pill">
+                            descripcion
+                        </a>
+                    </div>
                 <div class="card-footer bg-transpa border-0 mt-3">
                     <a href="index3.php?id<?=$paquete['id_planes']?>"
                     class="btn btn-success w-100 fw-bold rounded-pill">
