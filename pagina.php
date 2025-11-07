@@ -15,12 +15,86 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
 <style>
+/* ====== Colores pastel ====== */
+:root {
+    --color-rosa: #ffcad4;
+    --color-celeste: #aee6e6;
+    --color-amarillo: #ffd6a5;
+    --color-lila: #cdb4db;
+    --color-verde: #b9fbc0;
+    --color-fondo: #fefcfb;
+    --color-texto: #444;
+}
+
 /* ====== Estilos generales ====== */
-body { background-color: #e6f2ff; padding-top: 80px; }
-.card { transition: transform .18s ease, box-shadow .18s ease; }
-.card:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: "Poppins", sans-serif;
+    padding-top: 80px;
+}
+
+.card {
+    background-color: #fffafc;
+    border: 1px solid #f5e6e8;
+    border-radius: 20px;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.card-title {
+    color: #444;
+    font-weight: 600;
+}
 .quantity-input { width: 80px; }
-.modal-img { max-height: 220px; object-fit: cover; width:100%; border-radius:6px; }
+.modal-img { max-height: 220px; object-fit: cover; width:100%; border-radius:10px; }
+
+/* ====== Navbar ====== */
+.navbar {
+    background-color: var(--color-rosa) !important;
+    border-bottom: 2px solid #ffdce5;
+}
+.navbar-brand {
+    font-weight: 700;
+    color: #444 !important;
+}
+.nav-link {
+    color: #333 !important;
+    font-weight: 500;
+}
+.nav-link:hover {
+    color: #000 !important;
+}
+
+/* ====== Botones pastel ====== */
+.btn-primary {
+    background-color: var(--color-celeste);
+    border: none;
+    color: #333;
+    font-weight: 600;
+}
+.btn-primary:hover {
+    background-color: #9edede;
+}
+.btn-success {
+    background-color: var(--color-verde);
+    border: none;
+    color: #333;
+    font-weight: 600;
+}
+.btn-success:hover {
+    background-color: #a2f5ab;
+}
+.btn-outline-primary {
+    border-color: var(--color-lila);
+    color: var(--color-lila);
+}
+.btn-outline-primary:hover {
+    background-color: var(--color-lila);
+    color: #fff;
+}
 
 /* ====== Estrellas ====== */
 .stars {
@@ -29,23 +103,39 @@ body { background-color: #e6f2ff; padding-top: 80px; }
     cursor: pointer;
 }
 .star {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #ddd;
     transition: color 0.2s;
 }
-.star.selected,
+.star.selected {
+    color: #f7b267;
+}
 .star:hover,
 .star:hover ~ .star {
-    color: #ffc107;
+    color: #f7b267;
+}
+
+/* ====== Modal ====== */
+.modal-content {
+    border-radius: 20px;
+    background-color: #fff9fb;
+}
+.modal-header {
+    background-color: #ffeef3;
+    border-bottom: none;
+}
+.modal-footer {
+    background-color: #fff5f7;
+    border-top: none;
 }
 </style>
 </head>
 <body>
 
 <!-- ====== Navbar ====== -->
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">Tour Emprende</a>
+        <a class="navbar-brand fw-bold" href="#">Tour Emprende 🌸</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -66,9 +156,9 @@ body { background-color: #e6f2ff; padding-top: 80px; }
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menú</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        <li><a class="dropdown-item" href="#">Configuración ⚙️</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Asistente</a></li>
+                        <li><a class="dropdown-item" href="#">Asistente 🤖</a></li>
                     </ul>
                 </li>
             </ul>
@@ -79,7 +169,7 @@ body { background-color: #e6f2ff; padding-top: 80px; }
                     Iniciar sesión
                 </button>
 
-                <button type="button" class="btn btn-outline-success position-relative" data-bs-toggle="modal" data-bs-target="#cartModal" id="openCartBtn">
+                <button type="button" class="btn btn-outline-primary position-relative" data-bs-toggle="modal" data-bs-target="#cartModal" id="openCartBtn">
                     🛒 Ver Carrito
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCountBadge" style="display:none;">0</span>
                 </button>
@@ -93,41 +183,16 @@ body { background-color: #e6f2ff; padding-top: 80px; }
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="shareModalLabel">Compartir enlace</h5>
+                <h5 class="modal-title fw-bold" id="shareModalLabel">Compartir enlace 💌</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <label for="shareUrl" class="form-label small">Copia este enlace y compártelo</label>
                 <div class="input-group">
                     <input type="text" id="shareUrl" class="form-control" readonly>
-                    <button class="btn btn-outline-secondary" id="copyShareBtn" type="button">Copiar</button>
+                    <button class="btn btn-outline-primary" id="copyShareBtn" type="button">Copiar</button>
                 </div>
                 <div id="copyFeedback" class="small text-success mt-2" style="display:none;">Enlace copiado ✅</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ====== Modal Descripción ====== -->
-<div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="descriptionModalLabel">Descripción</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <img id="descriptionImage" src="" alt="Imagen" class="modal-img shadow-sm">
-                    </div>
-                    <div class="col-md-6">
-                        <h4 id="descriptionTitle"></h4>
-                        <p id="descriptionDates" class="mb-1"></p>
-                        <h5 id="descriptionPrice" class="text-success"></h5>
-                        <div id="descriptionText" class="mt-3"></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -138,7 +203,7 @@ body { background-color: #e6f2ff; padding-top: 80px; }
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="cartModalLabel">🛒 Tu Carrito</h5>
+                <h5 class="modal-title fw-bold" id="cartModalLabel">🛍️ Tu Carrito</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
@@ -146,7 +211,7 @@ body { background-color: #e6f2ff; padding-top: 80px; }
                 <div id="cartEmpty" class="text-center text-muted">No hay productos en el carrito.</div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Seguir comprando</button>
+                <button class="btn btn-outline-primary" data-bs-dismiss="modal">Seguir comprando</button>
                 <button class="btn btn-success" id="checkoutBtn">Comprar</button>
             </div>
         </div>
@@ -169,7 +234,7 @@ body { background-color: #e6f2ff; padding-top: 80px; }
                 $data_attrs = "data-id='$id' data-nombre='$nombre' data-precio='$precio' data-fechas='Inicio: $f_inicio — Fin: $f_fin' data-imagen='$imagen' data-descripcion='$descripcion'";
         ?>
         <div class="col">
-            <div class="card h-100">
+            <div class="card h-100 shadow-sm">
                 <img src="<?= $imagen ?>" class="card-img-top" alt="<?= $nombre ?>" style="height:200px; object-fit:cover;">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title"><?= $nombre ?></h5>
@@ -192,7 +257,7 @@ body { background-color: #e6f2ff; padding-top: 80px; }
                         </div>
 
                         <div class="mt-2">
-                            <a href="index3.php?id=<?= urlencode($id) ?>" class="btn btn-success w-100 fw-bold rounded-pill">Comprar</a>
+                            <a href="index3.php?id=<?= urlencode($id) ?>" class="btn btn-primary w-100 fw-bold rounded-pill">Comprar</a>
                         </div>
                     </div>
                 </div>
@@ -208,82 +273,6 @@ body { background-color: #e6f2ff; padding-top: 80px; }
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-/* =====================================================
-    FUNCIONALIDADES: Compartir | Descripción | Carrito | Estrellas
-===================================================== */
-
-/* ---------- Modal Compartir ---------- */
-document.addEventListener('DOMContentLoaded', function() {
-    const shareUrlInput = document.getElementById('shareUrl');
-    const copyBtn = document.getElementById('copyShareBtn');
-    const copyFeedback = document.getElementById('copyFeedback');
-    var shareModal = document.getElementById('shareModal');
-    shareModal.addEventListener('show.bs.modal', function () {
-        shareUrlInput.value = window.location.href;
-        copyFeedback.style.display = 'none';
-    });
-    copyBtn.addEventListener('click', function() {
-        navigator.clipboard.writeText(shareUrlInput.value);
-        copyFeedback.style.display = 'block';
-    });
-});
-
-/* ---------- Modal Descripción ---------- */
-document.addEventListener('click', function(e) {
-    const btn = e.target.closest('.btn-description');
-    if (!btn) return;
-    document.getElementById('descriptionTitle').textContent = btn.dataset.nombre;
-    document.getElementById('descriptionDates').textContent = btn.dataset.fechas;
-    document.getElementById('descriptionPrice').textContent = "Precio: " + btn.dataset.precio;
-    document.getElementById('descriptionText').innerHTML = btn.dataset.descripcion;
-    document.getElementById('descriptionImage').src = btn.dataset.imagen;
-});
-
-/* ---------- Carrito ---------- */
-(function(){
-    const CART_KEY = 'mis_paquetes_carrito_v1';
-    function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||'[]');}
-    function setCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c));renderCart();}
-    function addToCart(it){const c=getCart();const ex=c.find(i=>i.id==it.id);if(ex)ex.qty+=it.qty;else c.push(it);setCart(c);}
-    function removeFromCart(id){setCart(getCart().filter(i=>i.id!=id));}
-    function updateQty(id,q){const c=getCart();const i=c.find(x=>x.id==id);if(i){i.qty=q;setCart(c);}}
-    function renderCart(){
-        const c=getCart(),cont=document.getElementById('cartContent'),emp=document.getElementById('cartEmpty'),badge=document.getElementById('cartCountBadge');
-        let t=c.reduce((s,x)=>s+x.qty,0);badge.style.display=t>0?'inline-block':'none';badge.textContent=t;
-        if(!c.length){cont.innerHTML='';emp.style.display='block';return;} emp.style.display='none';
-        cont.innerHTML=c.map(i=>`<div class='list-group-item d-flex gap-2 align-items-center'>
-            <img src='${i.imagen}' style='width:60px;height:50px;object-fit:cover;border-radius:5px;'>
-            <div class='flex-grow-1'>
-                <div class='d-flex justify-content-between'>
-                    <strong>${i.nombre}</strong><span class='text-success small'>${i.precio}</span>
-                </div>
-                <div class='mt-1 d-flex gap-2 align-items-center'>
-                    <input type='number' min='1' value='${i.qty}' data-id='${i.id}' class='form-control form-control-sm' style='width:70px;'>
-                    <button class='btn btn-sm btn-outline-danger btn-remove' data-id='${i.id}'>Eliminar</button>
-                </div>
-            </div></div>`).join('');
-    }
-    document.addEventListener('click',function(e){
-        const b=e.target.closest('.btn-add-cart');if(b){
-            const id=b.dataset.id,n=b.dataset.nombre,p=b.dataset.precio,img=b.dataset.imagen;
-            const qInput=document.getElementById('qty_'+id),q=qInput?Math.max(1,Number(qInput.value)):1;
-            addToCart({id:id,nombre:n,precio:p,imagen:img,qty:q});
-            new bootstrap.Modal(document.getElementById('cartModal')).show();
-        }
-        const r=e.target.closest('.btn-remove');if(r){removeFromCart(r.dataset.id);}
-    });
-    document.addEventListener('change',function(e){
-        if(e.target.matches('input[type=number][data-id]')) updateQty(e.target.dataset.id,Number(e.target.value));
-    });
-    document.getElementById('checkoutBtn').addEventListener('click',()=>{
-        const c=getCart();if(!c.length)return alert('El carrito está vacío');
-        alert('Compra simulada con '+c.reduce((s,i)=>s+i.qty,0)+' artículos.');
-        localStorage.removeItem(CART_KEY);renderCart();
-        bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
-    });
-    document.addEventListener('DOMContentLoaded',renderCart);
-})();
-
 /* ---------- Estrellas seleccionables ---------- */
 document.addEventListener('click', function(e) {
     const star = e.target.closest('.star');
