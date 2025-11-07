@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-11-2025 a las 20:53:12
+-- Tiempo de generación: 07-11-2025 a las 19:07:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,10 +42,26 @@ CREATE TABLE `carrito` (
 
 CREATE TABLE `metodo_pago` (
   `id_metodo` int(15) NOT NULL,
-  `tipo_pago` varchar(20) NOT NULL,
+  `tipo_pago` varchar(35) NOT NULL,
   `detalles_pago` varchar(35) NOT NULL,
   `id_usuario` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `metodo_pago`
+--
+
+INSERT INTO `metodo_pago` (`id_metodo`, `tipo_pago`, `detalles_pago`, `id_usuario`) VALUES
+(1, 'Tarjeta de Crédito', 'Visa terminada en 4567', 1),
+(2, 'Tarjeta de Débito', 'Mastercard terminada en 8901', 2),
+(3, 'Transferencia Bancaria', 'Banco XYZ, Cuenta Ahorros', 3),
+(4, 'PayPal', 'Correo: usuario1@mail.com', 4),
+(5, 'Tarjeta de Crédito', 'Amex terminada en 2345', 5),
+(6, 'Pago en Efectivo', 'Tienda de conveniencia', 6),
+(7, 'Transferencia Bancaria', 'Banco ABC, Cuenta Corriente', 7),
+(8, 'Tarjeta de Débito', 'Visa terminada en 6789', 8),
+(9, 'PayPal', 'Correo: usuario2@mail.com', 9),
+(10, 'Monedero Virtual', 'Alias: VirtualPay-123', 10);
 
 -- --------------------------------------------------------
 
@@ -56,7 +72,7 @@ CREATE TABLE `metodo_pago` (
 CREATE TABLE `planes` (
   `id_planes` int(15) NOT NULL,
   `nom_planes` varchar(35) NOT NULL,
-  `imagenes` longtext NOT NULL,
+  `detalles_planes` varchar(70) NOT NULL,
   `estado` varchar(15) NOT NULL,
   `f_inicio` date NOT NULL,
   `f_fin` date NOT NULL,
@@ -67,22 +83,22 @@ CREATE TABLE `planes` (
 -- Volcado de datos para la tabla `planes`
 --
 
-INSERT INTO `planes` (`id_planes`, `nom_planes`, `imagenes`, `estado`, `f_inicio`, `f_fin`, `precio`) VALUES
-(1, 'Plan Básico', '', 'Activo', '2025-01-10', '2025-06-10', 6500.00),
-(2, 'Plan Familiar', '', 'Activo', '2025-02-01', '2025-08-01', 11800.00),
-(3, 'Plan Premium', '', 'Inactivo', '2025-03-05', '2025-12-05', 18500.00),
-(4, 'Plan Empresarial', '', 'Activo', '2025-04-15', '2025-10-15', 29900.00),
-(5, 'Plan Estudiantil', '', 'Suspendido', '2025-05-01', '2025-11-01', 5200.00),
-(6, 'Plan Plus', '', 'Activo', '2025-03-10', '2025-09-10', 9300.00),
-(7, 'Plan Familiar Plus', '', 'Activo', '2025-06-01', '2025-12-01', 14500.00),
-(8, 'Plan Corporativo', '', 'Activo', '2025-07-15', '2026-01-15', 25200.00),
-(9, 'Plan Económico', '', 'Activo', '2025-02-05', '2025-07-05', 4800.00),
-(10, 'Plan Ejecutivo', '', 'Activo', '2025-05-20', '2025-11-20', 18800.00),
-(11, 'Plan Premium Plus', '', 'Inactivo', '2025-03-25', '2025-09-25', 21500.00),
-(12, 'Plan PyME', '', 'Activo', '2025-04-05', '2025-10-05', 16700.00),
-(13, 'Plan Avanzado', '', 'Activo', '2025-01-20', '2025-07-20', 13200.00),
-(14, 'Plan Ultra', '', 'Suspendido', '2025-06-10', '2025-12-10', 27400.00),
-(15, 'Plan Anual Completo', '', 'Activo', '2025-01-01', '2025-12-31', 31500.00);
+INSERT INTO `planes` (`id_planes`, `nom_planes`, `detalles_planes`, `estado`, `f_inicio`, `f_fin`, `precio`) VALUES
+(1, 'Plan Básico', 'Paquete completo de playa con excursiones y comidas incluidas.', 'Activo', '2025-01-10', '2025-06-10', 6500.00),
+(2, 'Plan Familiar', 'Aventura por las sierras con caminatas y paseos en bici.', 'Activo', '2025-02-01', '2025-08-01', 11800.00),
+(3, 'Plan Premium', 'Tour cultural por ciudades con museos y monumentos.', 'Inactivo', '2025-03-05', '2025-12-05', 18500.00),
+(4, 'Plan Empresarial', 'Escapada romántica con hotel boutique y spa.', 'Activo', '2025-04-15', '2025-10-15', 29900.00),
+(5, 'Plan Estudiantil', 'Plan familiar con parques, actividades y pensión completa.', 'Suspendido', '2025-05-01', '2025-11-01', 5200.00),
+(6, 'Plan Plus', 'Excursión ecológica en contacto con la naturaleza.', 'Activo', '2025-03-10', '2025-09-10', 9300.00),
+(7, 'Plan Familiar Plus', 'Circuito gastronómico con degustaciones y clases de cocina.', 'Activo', '2025-06-01', '2025-12-01', 14500.00),
+(8, 'Plan Corporativo', 'Tour internacional con vuelos, guía y hoteles incluidos.', 'Activo', '2025-07-15', '2026-01-15', 25200.00),
+(9, 'Plan Económico', 'Paquete de relax con termas, masajes y spa.', 'Activo', '2025-02-05', '2025-07-05', 4800.00),
+(10, 'Plan Ejecutivo', 'Aventura extrema con senderismo y deportes acuáticos.', 'Activo', '2025-05-20', '2025-11-20', 18800.00),
+(11, 'Plan Premium Plus', 'Viaje al norte argentino con pueblos y viñedos.', 'Inactivo', '2025-03-25', '2025-09-25', 21500.00),
+(12, 'Plan PyME', 'Tour fotográfico por paisajes destacados con guía.', 'Activo', '2025-04-05', '2025-10-05', 16700.00),
+(13, 'Plan Avanzado', 'Programa de turismo aventura con rafting y canopy.', 'Activo', '2025-01-20', '2025-07-20', 13200.00),
+(14, 'Plan Ultra', 'Paquete cultural con espectáculos y gastronomía local.', 'Suspendido', '2025-06-10', '2025-12-10', 27400.00),
+(15, 'Plan Anual Completo', 'Viaje de lujo con hoteles cinco estrellas y traslados privados.', 'Activo', '2025-01-01', '2025-12-31', 31500.00);
 
 -- --------------------------------------------------------
 
