@@ -1,293 +1,230 @@
 <?php
 require_once 'conexiones.php';
-
-// Consulta paquetes activos
-$paquetes = $conexion->query("SELECT * FROM planes WHERE planes.estado = 'activo';");
+$paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tours Emprender</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tours Emprender</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-
-<style>
-/* ====== Colores pastel ====== */
-:root {
-    --color-rosa: #ffcad4;
-    --color-celeste: #aee6e6;
-    --color-amarillo: #ffd6a5;
-    --color-lila: #cdb4db;
-    --color-verde: #b9fbc0;
-    --color-fondo: #fefcfb;
-    --color-texto: #444;
-}
-
-/* ====== Estilos generales ====== */
-body {
-    background-color: var(--color-fondo);
-    color: var(--color-texto);
-    font-family: "Poppins", sans-serif;
-    padding-top: 80px;
-}
-
-.card {
-    background-color: #fffafc;
-    border: 1px solid #f5e6e8;
-    border-radius: 20px;
-    transition: transform .18s ease, box-shadow .18s ease;
-}
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-.card-title {
-    color: #444;
-    font-weight: 600;
-}
-.quantity-input { width: 80px; }
-.modal-img { max-height: 220px; object-fit: cover; width:100%; border-radius:10px; }
-
-/* ====== Navbar ====== */
-.navbar {
-    background-color: var(--color-rosa) !important;
-    border-bottom: 2px solid #ffdce5;
-}
-.navbar-brand {
-    font-weight: 700;
-    color: #444 !important;
-}
-.nav-link {
-    color: #333 !important;
-    font-weight: 500;
-}
-.nav-link:hover {
-    color: #000 !important;
-}
-
-/* ====== Botones pastel ====== */
-.btn-primary {
-    background-color: var(--color-celeste);
-    border: none;
-    color: #333;
-    font-weight: 600;
-}
-.btn-primary:hover {
-    background-color: #9edede;
-}
-.btn-success {
-    background-color: var(--color-verde);
-    border: none;
-    color: #333;
-    font-weight: 600;
-}
-.btn-success:hover {
-    background-color: #a2f5ab;
-}
-.btn-outline-primary {
-    border-color: var(--color-lila);
-    color: var(--color-lila);
-}
-.btn-outline-primary:hover {
-    background-color: var(--color-lila);
-    color: #fff;
-}
-
-/* ====== Estrellas ====== */
-.stars {
-    display: flex;
-    gap: 4px;
-    cursor: pointer;
-}
-.star {
-    font-size: 1.4rem;
-    color: #ddd;
-    transition: color 0.2s;
-}
-.star.selected {
-    color: #f7b267;
-}
-.star:hover,
-.star:hover ~ .star {
-    color: #f7b267;
-}
-
-/* ====== Modal ====== */
-.modal-content {
-    border-radius: 20px;
-    background-color: #fff9fb;
-}
-.modal-header {
-    background-color: #ffeef3;
-    border-bottom: none;
-}
-.modal-footer {
-    background-color: #fff5f7;
-    border-top: none;
-}
-</style>
+        <style>
+                /* 🎨 Colores pastel suaves */
+                body {
+                        background-color: #f7f9fb;
+                        color: #333;
+                        padding-top: 80px;
+                }
+                .navbar {
+                        background-color: #b8d8d8 !important;
+                }
+                .card {
+                        background-color: #ffffff;
+                        border: none;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        border-radius: 15px;
+                        transition: transform 0.2s;
+                }
+                .card:hover {
+                        transform: scale(1.02);
+                }
+                .btn-success {
+                        background-color: #a0d995;
+                        border: none;
+                }
+                .btn-success:hover {
+                        background-color: #8bc48a;
+                }
+                .modal-content {
+                        border-radius: 10px;
+                }
+                .estrella {
+                        color: #ddd;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                }
+                .estrella.seleccionada {
+                        color: gold;
+                }
+        </style>
 </head>
+
 <body>
 
-<!-- ====== Navbar ====== -->
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+<!-- 🧭 Navbar superior -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">Tour Emprende 🌸</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand fw-bold" href="#">🌎 Tour Emprende</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Contenido del menú -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!-- Inicio -->
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
+        <div class="collapse navbar-collapse" id="navbarContenido">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
 
-                <!-- Compartir -->
+                <!-- Botón Compartir -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#shareModal">Compartir</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalCompartir">Compartir</a>
                 </li>
 
-                <!-- Dropdown configuración / asistente -->
+                <!-- Dropdown Configuración / Asistente -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menú</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Configuración ⚙️</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Asistente 🤖</a></li>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" role="button" data-bs-toggle="dropdown">Menú</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        <li><a class="dropdown-item" href="#">Asistente</a></li>
                     </ul>
                 </li>
             </ul>
 
-            <!-- Botones sesión y carrito -->
-            <div class="d-flex align-items-center gap-2">
-                <button onclick="iniciarSesion()" type="button" class="btn btn-primary fw-bold rounded-pill shadow-sm px-4 py-2">
-                    Iniciar sesión
-                </button>
-
-                <button type="button" class="btn btn-outline-primary position-relative" data-bs-toggle="modal" data-bs-target="#cartModal" id="openCartBtn">
-                    🛒 Ver Carrito
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCountBadge" style="display:none;">0</span>
-                </button>
-            </div>
+            <!-- Botones de sesión y carrito -->
+            <button class="btn btn-primary me-2">Iniciar sesión</button>
+            <button onclick="abrirCarrito()" class="btn btn-outline-success">🛒 Ver Carrito</button>
         </div>
     </div>
 </nav>
 
-<!-- ====== Modal Compartir ====== -->
-<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
+<!-- 📤 Modal Compartir -->
+<div class="modal fade" id="modalCompartir" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="shareModalLabel">Compartir enlace 💌</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <h5 class="modal-title">Compartir esta página</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <label for="shareUrl" class="form-label small">Copia este enlace y compártelo</label>
-                <div class="input-group">
-                    <input type="text" id="shareUrl" class="form-control" readonly>
-                    <button class="btn btn-outline-primary" id="copyShareBtn" type="button">Copiar</button>
-                </div>
-                <div id="copyFeedback" class="small text-success mt-2" style="display:none;">Enlace copiado ✅</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ====== Modal Carrito ====== -->
-<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="cartModalLabel">🛍️ Tu Carrito</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <div id="cartContent"></div>
-                <div id="cartEmpty" class="text-center text-muted">No hay productos en el carrito.</div>
+                <p>Copia este enlace para compartir:</p>
+                <input type="text" id="linkCompartir" class="form-control" value="<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>" readonly>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-primary" data-bs-dismiss="modal">Seguir comprando</button>
-                <button class="btn btn-success" id="checkoutBtn">Comprar</button>
+                <button class="btn btn-success" onclick="copiarEnlace()">Copiar enlace</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ====== Cards de paquetes ====== -->
-<div class="container mt-3">
+<!-- 🛒 Modal Carrito -->
+<div id="carritoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1050;">
+    <div style="background:#fff; width:400px; margin:10% auto; padding:20px; border-radius:10px; position:relative;">
+        <h4>🛒 Tu Carrito</h4>
+        <div id="contenidoCarrito"><p>No hay productos en el carrito.</p></div>
+        <button onclick="cerrarCarrito()" class="btn btn-danger btn-sm" style="position:absolute; top:10px; right:10px;">X</button>
+    </div>
+</div>
+
+<!-- 🧳 Listado de planes -->
+<div class="container mt-4">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <?php
-        if ($paquetes && $paquetes->num_rows > 0) {
-            foreach($paquetes as $paquete) {
-                $id = $paquete['id_planes'] ?? '';
-                $nombre = htmlspecialchars($paquete['nom_planes'] ?? 'Sin nombre');
-                $precio = htmlspecialchars($paquete['precio'] ?? '0');
-                $f_inicio = htmlspecialchars($paquete['f_inicio'] ?? '');
-                $f_fin = htmlspecialchars($paquete['f_fin'] ?? '');
-                $imagen = $paquete['imagen'] ?? $paquete['foto'] ?? "https://picsum.photos/seed/paquete{$id}/480/260";
-                $descripcion = htmlspecialchars($paquete['descripcion'] ?? 'No hay descripción disponible.');
-                $data_attrs = "data-id='$id' data-nombre='$nombre' data-precio='$precio' data-fechas='Inicio: $f_inicio — Fin: $f_fin' data-imagen='$imagen' data-descripcion='$descripcion'";
-        ?>
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="<?= $imagen ?>" class="card-img-top" alt="<?= $nombre ?>" style="height:200px; object-fit:cover;">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title"><?= $nombre ?></h5>
-                    <p class="mb-1 small text-muted">Inicio: <?= $f_inicio ?> — Fin: <?= $f_fin ?></p>
+        <?php foreach($paquetes as $paquete): ?>
+            <div class="col">
+                <div class="card h-100">
+                    <!-- Imagen del plan desde BD -->
+                    <img src="<?=$paquete['imagenes']?>" class="card-img-top" alt="<?=$paquete['nom_planes']?>" style="height:180px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title"><?=$paquete['nom_planes']?></h5>
+                        <p class="text-muted mb-1">Inicio: <?=$paquete['f_inicio']?></p>
+                        <p class="text-muted">Fin: <?=$paquete['f_fin']?></p>
+                        <h5 class="text-success fw-bold">$<?=$paquete['precio']?></h5>
 
-                    <!-- Estrellas seleccionables -->
-                    <div class="stars mb-2" data-id="<?= $id ?>">
-                        <?php for ($i=1; $i<=5; $i++): ?>
-                            <span class="star" data-value="<?= $i ?>">★</span>
-                        <?php endfor; ?>
-                    </div>
-
-                    <div class="mt-auto">
-                        <h5 class="text-success">Precio: <?= $precio ?></h5>
-
-                        <div class="d-flex gap-2 mt-3">
-                            <button type="button" class="btn btn-outline-primary flex-grow-1 btn-description" <?= $data_attrs ?> data-bs-toggle="modal" data-bs-target="#descriptionModal">Descripción</button>
-                            <input type="number" min="1" value="1" class="form-control quantity-input" id="qty_<?= $id ?>">
-                            <button type="button" class="btn btn-success btn-add-cart" <?= $data_attrs ?>>Agregar</button>
+                        <!-- ⭐ Estrellas seleccionables -->
+                        <div class="mb-2">
+                            <span class="estrella" onclick="seleccionarEstrella(this)">★</span>
+                            <span class="estrella" onclick="seleccionarEstrella(this)">★</span>
+                            <span class="estrella" onclick="seleccionarEstrella(this)">★</span>
+                            <span class="estrella" onclick="seleccionarEstrella(this)">★</span>
+                            <span class="estrella" onclick="seleccionarEstrella(this)">★</span>
                         </div>
 
-                        <div class="mt-2">
-                            <a href="index3.php?id=<?= urlencode($id) ?>" class="btn btn-primary w-100 fw-bold rounded-pill">Comprar</a>
+                        <!-- Botones Descripción y Comprar -->
+                        <button class="btn btn-info w-100 mb-2" data-bs-toggle="modal" data-bs-target="#descripcionModal<?=$paquete['id_planes']?>">Descripción</button>
+
+                        <div class="input-group">
+                            <input type="number" min="1" value="1" id="cantidad<?=$paquete['id_planes']?>" class="form-control text-center">
+                            <button class="btn btn-success w-50" onclick="agregarAlCarrito('<?=$paquete['nom_planes']?>', <?=$paquete['precio']?>, <?=$paquete['id_planes']?>)">Agregar 🛒</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php }} else { ?>
-            <div class="col-12"><div class="alert alert-info">No hay paquetes activos.</div></div>
-        <?php } ?>
+
+            <!-- Modal de descripción -->
+            <div class="modal fade" id="descripcionModal<?=$paquete['id_planes']?>" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header"><h5><?=$paquete['nom_planes']?></h5></div>
+                        <div class="modal-body">
+                            <p><?=$paquete['descripcion']?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </div>
 
-<!-- ====== Bootstrap JS ====== -->
+<!-- 📜 Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-/* ---------- Estrellas seleccionables ---------- */
-document.addEventListener('click', function(e) {
-    const star = e.target.closest('.star');
-    if (!star) return;
-    const container = star.parentElement;
-    const value = parseInt(star.dataset.value);
-    [...container.children].forEach(s => s.classList.remove('selected'));
-    for (let i = 0; i < value; i++) container.children[i].classList.add('selected');
-});
+let carrito = [];
 
-/* ---------- Iniciar sesión ---------- */
-function iniciarSesion() {
-    alert('Función iniciar sesión: aquí puedes colocar tu propio login.');
+// 🟢 Abrir y cerrar el carrito
+function abrirCarrito() {
+    document.getElementById('carritoModal').style.display = 'block';
+    mostrarCarrito();
+}
+function cerrarCarrito() {
+    document.getElementById('carritoModal').style.display = 'none';
+}
+
+// 🛒 Agregar producto al carrito
+function agregarAlCarrito(nombre, precio, id) {
+    const cantidad = document.getElementById('cantidad' + id).value;
+    carrito.push({nombre, precio, cantidad});
+    mostrarCarrito();
+    alert('Producto agregado al carrito');
+}
+
+// Mostrar contenido del carrito
+function mostrarCarrito() {
+    const cont = document.getElementById('contenidoCarrito');
+    if (carrito.length === 0) {
+        cont.innerHTML = '<p>No hay productos en el carrito.</p>';
+    } else {
+        let html = '<ul class="list-group">';
+        carrito.forEach((p, i) => {
+            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                ${p.nombre} x${p.cantidad}
+                <span>$${(p.precio * p.cantidad).toFixed(2)}</span>
+            </li>`;
+        });
+        html += '</ul>';
+        cont.innerHTML = html;
+    }
+}
+
+// 📋 Copiar enlace del modal compartir
+function copiarEnlace() {
+    const input = document.getElementById('linkCompartir');
+    input.select();
+    document.execCommand('copy');
+    alert('Enlace copiado al portapapeles');
+}
+
+// ⭐ Seleccionar estrellas
+function seleccionarEstrella(elemento) {
+    const estrellas = elemento.parentNode.querySelectorAll('.estrella');
+    let activa = false;
+    estrellas.forEach(estrella => {
+        if (estrella === elemento) activa = true;
+        estrella.classList.toggle('seleccionada', activa);
+    });
 }
 </script>
-
 </body>
 </html>
