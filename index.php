@@ -163,7 +163,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 </div>
 
 <!-- Carrito Modal -->
-<div id="carritoModal" class="d-flex">
+<div id="carritoModal">
     <div id="carritoContenido">
         <h5 class="text-center">🛍 Tu Carrito</h5>
         <div id="productosCarrito" class="mt-3">No hay productos agregados.</div>
@@ -200,7 +200,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 
                         <!-- Botones -->
                         <div class="d-flex flex-column align-items-center mt-3">
-                            <button class="btn btn-info text-white mb-2" onclick="mostrarDescripcion('<?=$paquete['nom_planes']?>', '<?=$paquete['descripcion'] ?? 'Sin descripción disponible.'?>')">
+                            <button class="btn btn-info text-white mb-2" onclick="mostrarDescripcion('<?=$paquete['nom_planes']?>', '<?=$paquete['detalles_planes'] ?? 'Sin descripción disponible.'?>')">
                                 📄 Descripción
                             </button>
                             <div class="d-flex">
