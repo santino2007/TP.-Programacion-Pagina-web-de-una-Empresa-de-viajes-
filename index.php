@@ -15,18 +15,18 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 
     <style>
         body {
-            background-color: #f7fafc;
+            background-color:rgb(0, 0, 0);
             padding-top: 80px;
         }
 
         .navbar {
-            background: #b9d7ea;
+            background:rgb(77, 158, 229);
         }
 
         .card {
             border-radius: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgb(82, 13, 13);
+            background-color:rgb(255, 255, 255);
             transition: transform 0.2s ease;
         }
 
@@ -35,12 +35,12 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
         }
 
         .btn-success {
-            background-color: #7dcfb6;
+            background-color:rgb(255, 0, 208);
             border: none;
         }
 
         .btn-success:hover {
-            background-color: #64bfa3;
+            background-color:rgb(0, 0, 255);
         }
 
         /* Estilo de estrellas */
