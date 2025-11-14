@@ -1,6 +1,6 @@
 <?php 
 require_once 'componentes/conexion.php';
-        $contrasenia = '';
+require_once 'componentes/inicio-sesion.php';
 
 if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     $errores = '';
@@ -13,8 +13,23 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
         $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
         $frase->bind_param('s', $correo);
         $frase->execute();
-        $usuario = $frase->get_result()->fetch_assoc();
+
     }
+    $usuario = $frase->get_result()->fetch_assoc();
+    if ($usuario) {
+        if (password_verify($contrasenia, $usuario['contrasenia'])) {
+            session_start();
+            $_SESSION['usuario'] = $usuario['id'];
+
+            $conexion->close();
+            header('Location: index.php');
+        } else {
+            $errores .= "<div class='alert alert-danger'>La contraseña es incorrecta</div>";
+        }
+    } else {
+        $errores .= "<div class='alert alert-danger'>El usuario no existe</div>";
+    }
+
 }
 
 ?>
