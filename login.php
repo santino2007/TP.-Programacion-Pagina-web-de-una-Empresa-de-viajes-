@@ -1,8 +1,21 @@
 <?php 
 require_once 'componentes/conexion.php';
-        (global variable) string $contrasenia
+        $contrasenia = '';
 
-if ($_SERVER)
+if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
+    $errores = '';
+    $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
+    $contrasenia = $conexion->real_escape_string($_POST['contrasenia']);
+
+    if (empty($correo) || empty($contrasenia)) {
+        $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
+    } else {
+        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
+        $frase->bind_param('s', $correo);
+        $frase->execute();
+        $usuario = $frase->get_result()->fetch_assoc();
+    }
+}
 
 ?>
 <!DOCTYPE html>
