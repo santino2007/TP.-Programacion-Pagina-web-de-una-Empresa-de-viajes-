@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-11-2025 a las 19:07:14
+-- Tiempo de generación: 10-11-2025 a las 20:46:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -171,22 +171,6 @@ CREATE TABLE `usuarios` (
   `whatsapp` varchar(100) NOT NULL,
   `contraseña` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuario`, `nombre_us`, `gmail`, `num_tel`, `whatsapp`, `contraseña`) VALUES
-(1, 'JuanPerez', 'juanperez@gmail.com', '3516549872', '3516549872', 'Jp12345*'),
-(2, 'MariaLopez', 'maria.lopez@yahoo.com', '3517654321', '3517654321', 'Ml*2024'),
-(3, 'CarlosG', 'carlosg@hotmail.com', '3519988776', '3519988776', 'Cg!pass01'),
-(4, 'SofiaM', 'sofia.m@gmail.com', '3514433221', '3514433221', 'Sm2024#'),
-(5, 'LeoRod', 'leonardo.rod@gmail.com', '3512233445', '3512233445', 'LrPass*22'),
-(6, 'ValentinaR', 'vale.r@gmail.com', '3513344556', '3513344556', 'Vr@1234'),
-(7, 'MartinS', 'martin.s@hotmail.com', '3515566778', '3515566778', 'Ms*pass24'),
-(8, 'CamilaTor', 'camila.tor@gmail.com', '3516677889', '3516677889', 'Ct!4567'),
-(9, 'AndresF', 'andres.f@yahoo.com', '3517788990', '3517788990', 'Af#9876'),
-(10, 'JulietaC', 'julieta.c@gmail.com', '3518899001', '3518899001', 'Jc*2025');
 
 --
 -- Índices para tablas volcadas
