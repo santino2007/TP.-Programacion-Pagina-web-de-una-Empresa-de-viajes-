@@ -14,6 +14,11 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+
+    
+
+
+
         body {
             background-color:rgb(0, 0, 0);
             padding-top: 80px;
@@ -98,6 +103,10 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
     </style>
 </head>
 <body>
+
+
+<img src="logo.png" alt="Logo de la empresa" width="150">
+
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg fixed-top">
