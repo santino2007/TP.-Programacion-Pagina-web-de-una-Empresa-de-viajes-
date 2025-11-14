@@ -1,3 +1,10 @@
+<?php 
+require_once 'componentes/conexion.php';
+        (global variable) string $contrasenia
+
+if ($_SERVER)
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +18,9 @@
         <?php require_once 'comp-form-login.php'; ?>
     </form>
     <div>
-        <p>¿No tienes usuario? Registrate: <a </p>
+        <p>¿No tienes usuario? Registrate: <a href="registro.php">aqui</a> </p>
     </div>
+
+    <script src=""></script>
 </body>
 </html>
