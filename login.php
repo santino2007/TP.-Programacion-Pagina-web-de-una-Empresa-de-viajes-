@@ -19,7 +19,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'])) {
     if ($usuario) {
         if (password_verify($contrasenia, $usuario['contraseña'])) {
             session_start();
-            $_SESSION['usuario'] = $usuario['id'];
+            $_SESSION['usuario'] = $usuario['id_usuario'];
 
             $conexion->close();
             header('Location: index.php');
