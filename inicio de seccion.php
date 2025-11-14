@@ -7,7 +7,7 @@
         if(empty($correo) || empty($contrasenia)){
             $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
         } else {
-            $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?")
+            $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
             $frase->bind_param('s', $correo);
             $frase->execute();
             $usuario = $frase->get_result()->fetch_asspc();
