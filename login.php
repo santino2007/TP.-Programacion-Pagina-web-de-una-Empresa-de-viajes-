@@ -2,12 +2,12 @@
 require_once 'componentes/conexion.php';
 
 
-if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
+if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'])) {
     $errores = '';
-    $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
-    $contrasenia = $conexion->real_escape_string($_POST['contrasenia']);
+    $correo = $conexion->real_escape_string($_POST['nombre-us']);
+    $contrasenia = $conexion->real_escape_string($_POST['contraseña']);
 
-    if (empty($correo) || empty($contrasenia)) {
+    if (empty($correo) || empty($contraseña)) {
         $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
     } else {
         $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
@@ -17,12 +17,13 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     }
     $usuario = $frase->get_result()->fetch_assoc();
     if ($usuario) {
-        if (password_verify($contrasenia, $usuario['contrasenia'])) {
+        if (password_verify($contrasenia, $usuario['contraseña'])) {
             session_start();
-            $_SESSION['usuario'] = $usuario['id'];
+            $_SESSION['usuario'] = $usuario['id_usuario'];
 
             $conexion->close();
             header('Location: index.php');
+            exit;
         } else {
             $errores .= "<div class='alert alert-danger'>La contraseña es incorrecta</div>";
         }
