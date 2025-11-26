@@ -6,11 +6,11 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'])) {
     $correo = $conexion->real_escape_string($_POST['nombre-us']);
     $contrasenia = $conexion->real_escape_string($_POST['contraseña']);
 
-    if (empty($correo) || empty($contraseña)) {
+    if (empty($gmail) || empty($contraseña)) {
         $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
     } else {
         $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
-        $frase->bind_param('s', $correo);
+        $frase->bind_param('s', $gmail);
         $frase->execute();
 
     }
@@ -46,7 +46,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'])) {
         <?php require_once 'comp-form-login.php'; ?>
     </form>
     <div>
-        <p>¿No tienes usuario? Registrate: <a href="registro.php">aqui</a> </p>
+        <p>¿No tienes usuario? Registrate: <a href="registros.php">aqui</a> </p>
     </div>
 
     <script src=""></script>

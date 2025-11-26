@@ -134,6 +134,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
                     </ul>
                 </li>
             </ul>
+            <div>
                 <?php
                 if ($usuarios['userid']){
                     echo 'HOLA'. $usuarios['nombre_us'];
@@ -141,6 +142,7 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
                     echo '<a href="login.php">INICIAR SESIÓN</a>';
                 }
                 ?>
+            </div>
             <!-- Botón Carrito -->
             <button onclick="abrirCarrito()" class="btn btn-outline-success">🛒 Carrito</button>
         </div>
