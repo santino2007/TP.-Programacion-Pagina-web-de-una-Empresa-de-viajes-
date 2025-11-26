@@ -3,14 +3,14 @@ require_once 'componentes/conexion.php';
 
 if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'])) {
     $errores = '';
-    $correo = $conexion->real_escape_string($_POST['nombre-us']);
+    $gmail = $conexion->real_escape_string($_POST['nombre-us']);
     $contrasenia = $conexion->real_escape_string($_POST['contraseña']);
 
     if (empty($gmail) || empty($contraseña)) {
         $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
     } else {
         $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
-        $frase->bind_param('s', $gmail);
+        $frase->bind_param('s', $correo);
         $frase->execute();
 
     }
