@@ -1,5 +1,5 @@
 <?php
-require_once 'componentes/conexion.php';
+require_once 'conexiones.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
 $errores = '';
