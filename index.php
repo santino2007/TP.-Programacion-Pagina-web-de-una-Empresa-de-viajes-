@@ -1,5 +1,5 @@
 <?php
-require_once 'conexiones.php';
+require_once 'componentes/conexiones.php';
 $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 ?>
 
@@ -14,11 +14,6 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-
-    
-
-
-
         body {
             background-color:rgb(0, 0, 0);
             padding-top: 80px;
