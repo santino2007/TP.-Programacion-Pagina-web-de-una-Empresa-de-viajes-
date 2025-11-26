@@ -9,7 +9,7 @@ $contrasenia = $conexion->real_escape_string($_POST['contrasenia']);
 if (empty($correo) || empty($contrasenia) ){
     $errores .= "<div class='alert alert-danger'>Por favor, completa todos los campos.</div>";
 } else {
-    $query = $conexion->prepare('SELECT * FROM usuarios WHERE email = ?');
+    $query = $conexion->prepare('SELECT * FROM usuarios WHERE gmail = ?');
     $query->bind_param('s', $correo);
     $query->execute();
 
@@ -20,7 +20,7 @@ if (empty($correo) || empty($contrasenia) ){
     if(empty($errores)){
         $contra_hash = password_hash($contrasenia, PASSWORD_BCRYPT);
 
-        $query = $conexion->prepare(query: 'INSERT INTO usuarios (email, contrasenia) VALUES (?,?)');
+        $query = $conexion->prepare(query: 'INSERT INTO usuarios (gmail, contrasenia) VALUES (?,?)');
         $query->bind_param('ss', $correo, $contra_hash);
         $sentencia = $query->execute();
 

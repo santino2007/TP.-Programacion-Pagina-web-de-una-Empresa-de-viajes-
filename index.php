@@ -1,5 +1,5 @@
 <?php
-require_once 'componentes/conexiones.php';
+require_once 'conexiones.php';
 $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 ?>
 
@@ -129,9 +129,9 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
                     </ul>
                 </li>
             </ul>
-            <div>
+            <div><!-- Área de inision de usuarios -->
                 <?php
-                if ($usuarios['userid']){
+                if ($_SESSION['userid']){
                     echo 'HOLA'. $usuarios['nombre_us'];
                 } else{
                     echo '<a href="login.php">INICIAR SESIÓN</a>';
@@ -146,19 +146,19 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 
 <!-- Modal Compartir -->
 <div class="modal fade" id="compartirModal" tabindex="-1" aria-labelledby="compartirLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Compartir este sitio</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center">
-        <p>Copia el enlace para compartir:</p>
-        <input type="text" id="urlCompartir" class="form-control text-center" readonly value="<?='http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];?>">
-        <button class="btn btn-primary mt-2" onclick="copiarEnlace()">📋 Copiar enlace</button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Compartir este sitio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Copia el enlace para compartir:</p>
+                <input type="text" id="urlCompartir" class="form-control text-center" readonly value="<?='http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];?>">
+                <button class="btn btn-primary mt-2" onclick="copiarEnlace()">📋 Copiar enlace</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Modal Descripción -->
