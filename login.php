@@ -1,12 +1,12 @@
 <?php 
-require_once 'componentes/conexion.php';
+require_once 'conexion.php';
 
-if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'])) {
+if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     $errores = '';
-    $gmail = $conexion->real_escape_string($_POST['nombre-us']);
-    $contrasenia = $conexion->real_escape_string($_POST['contraseña']);
+    $correo = $conexion->real_escape_string($_POST['nombre-usuario']);
+    $contrasenia = $conexion->real_escape_string($_POST['contrasenia']);
 
-    if (empty($gmail) || empty($contraseña)) {
+    if (empty($correo) || empty($contrasenia)) {
         $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
     } else {
         $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
