@@ -20,7 +20,7 @@ if (empty($correo) || empty($contrasenia) ){
     if(empty($errores)){
         $contra_hash = password_hash($contrasenia, PASSWORD_BCRYPT);
 
-        $query = $conexion->prepare(query: 'INSERT INTO usuarios (gmail, contrasenia) VALUES (?,?)');
+        $query = $conexion->prepare(query: 'INSERT INTO usuarios (gmail, contraseña) VALUES (?,?)');
         $query->bind_param('ss', $correo, $contra_hash);
         $sentencia = $query->execute();
 
@@ -47,7 +47,7 @@ if (empty($correo) || empty($contrasenia) ){
 
 <body>
     <form method="POST" action="registro.php">
-        <?php require_once 'componentes/comp-form-login.php';?>
+        <?php require_once 'comp-form-login.php';?>
     </form>
     <div>
         <p>¿No tienes usuarios? Registrate: <a href="registro.php">aqui</a></p>
