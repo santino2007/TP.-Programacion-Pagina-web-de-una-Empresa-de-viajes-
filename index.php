@@ -1,6 +1,7 @@
 <?php
-require_once 'conexiones.php';
-$paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
+    session_start();
+        require_once 'conexiones.php';
+        $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 ?>
 
 <!DOCTYPE html>
@@ -131,8 +132,9 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
             </ul>
             <div><!-- Área de inision de usuarios -->
                 <?php
-                if ($_SESSION['userid']){
+                if ($_SESSION['nombre-usuario']){
                     echo 'HOLA'. $usuarios['nombre_us'];
+                    echo '<a href="logout.php">CERRAR SESIÓN</a>';
                 } else{
                     echo '<a href="login.php">INICIAR SESIÓN</a>';
                 }
