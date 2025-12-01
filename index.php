@@ -15,18 +15,18 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
 
     <style>
         body {
-            background-color:rgb(0, 0, 0);
+            background-color:rgb(243, 178, 118);
             padding-top: 80px;
         }
 
         .navbar {
-            background:rgb(77, 158, 229);
+            background:rgb(173, 97, 74);
         }
 
         .card {
             border-radius: 15px;
-            box-shadow: 0 2px 6px rgb(82, 13, 13);
-            background-color:rgb(255, 255, 255);
+            box-shadow: 0 2px 6px rgb(235, 179, 142);
+            background-color:rgb(235, 179, 142);
             transition: transform 0.2s ease;
         }
 
