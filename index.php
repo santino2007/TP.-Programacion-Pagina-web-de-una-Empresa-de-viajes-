@@ -35,12 +35,12 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
         }
 
         .btn-success {
-            background-color:rgb(255, 0, 208);
+            background-color:rgb(0, 0, 0);
             border: none;
         }
 
         .btn-success:hover {
-            background-color:rgb(0, 0, 255);
+            background-color:rgb(255, 0, 0);
         }
 
         /* Estilo de estrellas */
@@ -88,12 +88,12 @@ $paquetes = $conexion->query("SELECT * FROM planes WHERE estado = 'activo';");
         }
 
         .btn-vaciar {
-            background-color: #ffb3b3;
+            background-color:rgb(255, 0, 0);
             border: none;
         }
 
         .btn-vaciar:hover {
-            background-color: #ff9999;
+            background-color:rgb(255, 2, 2);
         }
     </style>
 </head>
