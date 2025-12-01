@@ -9,7 +9,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     if (empty($correo) || empty($contrasenia)) {
         $errores .= "<div class='alert alert-danger'>por favor completa todos los campos</div>";
     } else {
-        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?,");
+        $frase = $conexion->prepare("SELECT * FROM usuarios WHERE usuarios.gmail = ?");
         $frase->bind_param('s', $correo);
         $frase->execute();
 
@@ -19,12 +19,15 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
         if (password_verify($contrasenia, $usuario['contraseña'])) {
             session_start();
             $_SESSION['usuario'] = $usuario['id_usuario'];
-
+            $_SESSION['gmail'] = $usuario['gmail'];
             $conexion->close();
             header('Location: index.php');
             exit;
         } else {
             $errores .= "<div class='alert alert-danger'>La contraseña es incorrecta</div>";
+            header('Location: login.php');
+            echo $errores;
+            exit;
         }
     } else {
         $errores .= "<div class='alert alert-danger'>El usuario no existe</div>";
