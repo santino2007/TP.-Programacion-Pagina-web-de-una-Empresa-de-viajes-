@@ -201,7 +201,7 @@
                 <div class="card h-100 text-center">
                     <!-- Imagen desde la base -->
                     <img src="<?= $paquete['imagen'] ?? 'https://via.placeholder.com/250x120'; ?>" class="card-img-top" alt="<?=$paquete['nom_planes']?>">
-
+                    <img src="https://picsum.photos/250/120?random=7" class="card-img-top" alt="españa">
                     <div class="card-body">
                         <h5 class="card-title"><?=$paquete['nom_planes']?></h5>
                         <p>Inicio: <?=$paquete['f_inicio']?></p>
