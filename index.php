@@ -41,7 +41,7 @@
         }
 
         .btn-success:hover {
-            background-color:rgb(255, 0, 0);
+            background-color:rgb(247, 181, 181);
         }
 
         /* Estilo de estrellas */
