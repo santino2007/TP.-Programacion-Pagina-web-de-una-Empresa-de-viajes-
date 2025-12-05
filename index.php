@@ -16,9 +16,15 @@
 
     <style>
         body {
-            background-color:rgb(243, 178, 118);
-            padding-top: 80px;
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
+        
 
         .navbar {
             background:rgb(173, 97, 74);
