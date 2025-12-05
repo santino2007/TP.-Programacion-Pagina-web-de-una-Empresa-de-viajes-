@@ -43,18 +43,18 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* Fondo básico para toda la página */
+      
         body {
-            background-color:rgb(219, 123, 123); /* Color de fondo predeterminado (puedes cambiarlo) */
+            background-color:rgb(219, 123, 123); 
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
         }
 
-        /* Centrar el formulario en la página */
+       
         form {
-            background-color: #fff; /* Fondo blanco para el formulario */
+            background-color: #fff; 
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -62,7 +62,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
             margin: 50px auto;
         }
 
-        /* Estilo para el enlace */
+        
         .register-link {
             text-align: center;
             margin-top: 15px;
