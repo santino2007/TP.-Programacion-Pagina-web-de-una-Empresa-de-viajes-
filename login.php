@@ -60,7 +60,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
             background-color: #fff; 
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgb(226, 9, 9);
+            box-shadow: 0 4px 8px rgb(0, 0, 0);
             width: 300px;
             margin: 50px auto;
         }
