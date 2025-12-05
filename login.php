@@ -52,7 +52,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
         <?php require_once 'comp-form-login.php'; ?>
     </form>
     <div>
-        <p>¿No tienes usuario? Registrate: <a href="registros.php">aqui</a> </p>
+        <p>¿No tienes usuario? Registrate: <a href="registro.php">aqui</a> </p>
     </div>
 
     <script src=""></script>
