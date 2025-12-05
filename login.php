@@ -45,11 +45,13 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     <style>
       
         body {
-            background-color:rgb(219, 123, 123); 
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
        
