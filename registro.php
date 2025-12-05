@@ -51,7 +51,14 @@ if (empty($correo) || empty($contrasenia) ){
         <?php require_once 'comp-form-login.php';?>
     </form>
     <div>
-        <p>¿No tienes usuarios? Registrate: <a href="registro.php">aqui</a></p>
+        <?php
+            if (!empty($errores)) {
+                echo $errores;
+            }
+            if (isset($success)) {
+                echo $success;
+            }
+        ?>
     </div>
 
     

@@ -19,6 +19,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
         if (password_verify($contrasenia, $usuario['contraseña'])) {
             session_start();
             $_SESSION['usuario'] = $usuario['id_usuario'];
+            $_SESSION['nombre-usuario'] = $usuario['nombre_us'];
             $_SESSION['gmail'] = $usuario['gmail'];
             $conexion->close();
             header('Location: index.php');

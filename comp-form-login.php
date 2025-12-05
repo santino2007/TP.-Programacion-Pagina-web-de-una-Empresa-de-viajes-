@@ -1,4 +1,4 @@
-<label for="nombre-usuario">Nombre de usuario</label>
+<label for="nombre-usuario">gmail</label>
 <input type="email" name="nombre-usuario" id="nombre_usuario">
 
 <label for="contrasenia">Contraseña</label>
