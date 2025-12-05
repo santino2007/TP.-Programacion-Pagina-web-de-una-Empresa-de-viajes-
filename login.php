@@ -72,7 +72,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
         }
 
         .register-link a {
-            color: #007bff;
+            color:rgb(6, 41, 238);
             text-decoration: none;
         }
 
