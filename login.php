@@ -43,8 +43,9 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <style>
-      
+        /* Fondo general */
         body {
             background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
@@ -55,24 +56,24 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
             font-family: Arial, sans-serif;
         }
 
-       
+        /* Caja del formulario */
         form {
-            background-color: #fff; 
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgb(0, 0, 0);
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 9px;
+            box-shadow: 0 8px 8px rgb(0, 0, 0);
             width: 300px;
             margin: 50px auto;
         }
 
-        
+        /* Enlace de registro */
         .register-link {
             text-align: center;
             margin-top: 15px;
         }
 
         .register-link a {
-            color:rgb(6, 41, 238);
+            color: rgb(6, 41, 238);
             text-decoration: none;
         }
 
@@ -83,13 +84,15 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
 </head>
 
 <body>
-<div>
+
+    <div>
         <?php
             if (!empty($errores)) {
                 echo $errores;
             }
         ?>
     </div>
+
     <form method="POST" action="login.php">
         <?php require_once 'comp-form-login.php'; ?>
     </form>
@@ -97,7 +100,6 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
     <div class="register-link">
         <p>¿No tienes usuario? Registrate: <a href="registro.php">aquí</a></p>
     </div>
-    <script src=""></script>
 
 </body>
 </html>
