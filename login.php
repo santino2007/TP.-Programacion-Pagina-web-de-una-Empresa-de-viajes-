@@ -20,7 +20,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
         if (password_verify($contrasenia, $usuario['contraseña'])) {
             session_start();
             $_SESSION['usuario'] = $usuario['id_usuario'];
-            $_SESSION['nombre-usuario'] = $usuario['nombre_us'];
+            $_SESSION['nombre'] = $usuario['nombre_us'];
             $_SESSION['gmail'] = $usuario['gmail'];
             $conexion->close();
             header('Location: index.php');
@@ -84,6 +84,12 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
 
 <body>
 <div>
+        <?php
+            if (!empty($errores)) {
+                echo $errores;
+            }
+        ?>
+    </div>
     <form method="POST" action="login.php">
         <?php require_once 'comp-form-login.php'; ?>
     </form>

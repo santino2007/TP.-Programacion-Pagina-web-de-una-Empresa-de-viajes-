@@ -22,8 +22,8 @@ if (empty($correo) || empty($contrasenia) ){
     if(empty($errores)){
         $contra_hash = password_hash($contrasenia, PASSWORD_BCRYPT);
 
-        $query = $conexion->prepare(query: 'INSERT INTO usuarios (nombre_us,gmail, contraseña) VALUES (?,?,?)');
-        $query->bind_param('ss', $correo, $contra_hash);
+        $query = $conexion->prepare(query: 'INSERT INTO usuarios (nombre_us, gmail, contraseña) VALUES (?,?,?)');
+        $query->bind_param('sss', $nombre, $correo, $contra_hash);
         $sentencia = $query->execute();
 
         $query->close();
