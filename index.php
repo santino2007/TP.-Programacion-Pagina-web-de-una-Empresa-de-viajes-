@@ -41,7 +41,7 @@
         }
 
         .btn-success:hover {
-            background-color:rgb(247, 181, 181);
+            background-color:rgb(252, 126, 94);
         }
 
         /* Estilo de estrellas */
@@ -101,7 +101,6 @@
 <body>
 
 
-<img src="logo.png" alt="Logo de la empresa" width="150">
 
 
 <!-- NAVBAR -->

@@ -45,6 +45,9 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST' && isset($_POST['ingresar'])) {
 </head>
 
 <body>
+
+
+
     <form method="POST" action="login.php">
         <?php require_once 'comp-form-login.php'; ?>
     </form>
