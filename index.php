@@ -137,7 +137,7 @@
             </ul>
             <div><!-- Área de inision de usuarios -->
                 <?php
-                if ($_SESSION['id_usuario']){
+                if ($_SESSION['gmail']){
                     echo 'HOLA'. $usuarios['gmail'];
                     echo '<a href="logout.php">CERRAR SESIÓN</a>';
                 } else{
